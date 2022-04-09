@@ -1,0 +1,21 @@
+.main {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: 5% 95%;
+  grid-template-rows: auto;
+  grid-template-areas: "menu view";
+  column-gap: 0px;
+  row-gap: 0px;
+}
+
+.main__menu {
+  background-color: rgb(13, 126, 13);
+  grid-area: menu;
+}
+
+.main__view {
+  background-color: rgb(62, 75, 62);
+  grid-area: view;
+}
