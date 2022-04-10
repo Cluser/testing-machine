@@ -15,6 +15,37 @@ export class StationComponent implements OnInit {
   public stepValue: number = 0;
   public id: number = 1;
   public msg: any;
+  multi = [
+    {
+      name: "Germany",
+      series: [
+        {
+          name: "1990",
+          value: 62000000,
+        },
+        {
+          name: "2010",
+          value: 73000000,
+        },
+        {
+          name: "2011",
+          value: 89400000,
+        },
+      ],
+    },
+  ];
+
+  // options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = "Time";
+  yAxisLabel: string = "Value";
+  timeline: boolean = true;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.counterValue$ = this.store.select(getStationValue);
