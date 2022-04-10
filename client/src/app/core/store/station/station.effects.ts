@@ -3,8 +3,6 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
 import { closeSocket, getData, openSocket, socketClosed, socketOpened } from "./station.actions";
 import { map, mergeMap, tap } from "rxjs/operators";
-import { of, EMPTY } from "rxjs";
-
 import { webSocket } from "rxjs/webSocket";
 
 // Efect wykonuje sie zawsze po reducerze
@@ -30,8 +28,8 @@ export class LoadDataEffects {
         this.subject.pipe(
           map((data: any) => ({
             type: getData.type,
-            velocity: data.velocity,
-            time: data.time,
+            velocity: data.module[0].process[0].spindle_velocity,
+            time: 2,
           }))
         )
       )
