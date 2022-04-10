@@ -1,9 +1,9 @@
 export interface StationState {
-  value: number;
-  step: number;
+  velocity: number;
+  time: number;
 }
 
 export const initialState: StationState = {
-  value: 0,
-  step: 1,
+  velocity: 0,
+  time: 0,
 };

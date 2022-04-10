@@ -2,9 +2,7 @@ from pydantic import BaseModel
 
 class Measurement(BaseModel):
     id: int
-    bool: bool
-    int: int 
-    real: float
+    vibration: int
 
     class Config:
         orm_mode = True

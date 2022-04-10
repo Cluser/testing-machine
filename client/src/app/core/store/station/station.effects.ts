@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
-import { closeSocket, getData, increment, openSocket } from "./station.actions";
+import { closeSocket, getData, openSocket, socketClosed, socketOpened } from "./station.actions";
 import { map, mergeMap, tap } from "rxjs/operators";
+import { of, EMPTY } from "rxjs";
 
 import { webSocket } from "rxjs/webSocket";
 
@@ -16,14 +17,22 @@ export class LoadDataEffects {
   openSocket$ = createEffect(() =>
     this.actions$.pipe(
       ofType(openSocket),
-      tap((x) => console.log(x)),
+      map(() => ({
+        type: socketOpened.type,
+      }))
+    )
+  );
+
+  socketOpened$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(socketOpened),
       mergeMap(() =>
         this.subject.pipe(
           map((data: any) => ({
-            type: data.message,
-            step: 1,
-          })),
-          tap((x) => console.log(x))
+            type: getData.type,
+            velocity: data.velocity,
+            time: data.time,
+          }))
         )
       )
     )
@@ -33,15 +42,15 @@ export class LoadDataEffects {
     this.actions$.pipe(
       ofType(closeSocket),
       tap(() => this.subject.complete()),
-      mergeMap(() =>
-        this.subject.pipe(
-          map((data: any) => ({
-            type: data.message,
-            step: 1,
-          })),
-          tap((x) => console.log(x))
-        )
-      )
+      map((data: any) => ({
+        type: socketClosed.type,
+      }))
     )
   );
+
+  // socketClosed$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(socketClosed)
+  //   )
+  // );
 }

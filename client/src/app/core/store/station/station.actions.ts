@@ -1,10 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 
-export const increment = createAction("[Station] Increment");
-export const decrement = createAction("[Station] Decrement");
-export const reset = createAction("[Station] Reset");
-export const changeStep = createAction("[Station] Change step", props<{ step: number }>());
-export const getData = createAction("[Station] Get data");
-
 export const openSocket = createAction("[Station] Open socket");
+export const socketOpened = createAction("[Station] Socket opened");
 export const closeSocket = createAction("[Station] Close socket");
+export const socketClosed = createAction("[Station] Socket closed");
+export const getData = createAction("[Station] Get data", props<{ velocity: number; time: number }>());

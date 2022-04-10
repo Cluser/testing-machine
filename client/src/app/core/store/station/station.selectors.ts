@@ -4,7 +4,5 @@ import { StationState } from "./station.state";
 
 export const getStationState = (state: AppState) => state.stationState;
 
-export const getStationValue = createSelector(getStationState, (state: StationState) => state.value);
-
-// Wydzielenie selectora kroku licznika
-export const getStationStep = createSelector(getStationState, (state: StationState) => state.step);
+export const getStationVelocity = createSelector(getStationState, (state: StationState) => state.velocity);
+export const getStationTime = createSelector(getStationState, (state: StationState) => state.time);

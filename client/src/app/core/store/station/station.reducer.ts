@@ -1,32 +1,34 @@
 import { createReducer, on, props } from "@ngrx/store";
-import { changeStep, decrement, increment, reset } from "./station.actions";
+import { closeSocket, getData, openSocket, socketClosed, socketOpened } from "./station.actions";
 import { StationState, initialState } from "./station.state";
 
 export const stationReducer = createReducer(
-  initialState, // Definicja stanu początkowego
-  on(increment, (state) => onIncrement(state)),
-  on(decrement, (state) => onDecrement(state)),
-  on(reset, (state) => onReset(state)),
-  on(changeStep, (state, props) => onChangeStep(state, props))
+  initialState,
+  on(openSocket, (state) => onOpenSocket(state)),
+  on(socketOpened, (state) => onSocketOpened(state)),
+  on(closeSocket, (state) => onCloseSocket(state)),
+  on(socketClosed, (state) => onSocketClosed(state)),
+  on(getData, (state, props) => onGetData(state, props))
 );
 
-const onIncrement = (state: StationState) => ({
+const onOpenSocket = (state: StationState) => ({
   ...state,
-  value: state.value + state.step,
 });
 
-const onDecrement = (state: StationState) => ({
+const onSocketOpened = (state: StationState) => ({
   ...state,
-  value: state.value - state.step,
 });
 
-const onReset = (state: StationState) => ({
+const onCloseSocket = (state: StationState) => ({
   ...state,
-  value: initialState.value,
-  step: initialState.step,
 });
 
-const onChangeStep = (state: StationState, props: { step: number }) => ({
+const onSocketClosed = (state: StationState) => ({
   ...state,
-  step: props.step,
+});
+
+const onGetData = (state: StationState, props: { velocity: number; time: number }) => ({
+  ...state,
+  velocity: state.velocity + props.velocity,
+  time: state.time + props.time,
 });

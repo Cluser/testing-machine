@@ -1,5 +1,6 @@
+import asyncio
 from time import sleep
-from fastapi import APIRouter, WebSocket
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from db import general as db
 from fastapi.responses import HTMLResponse
 
@@ -14,6 +15,10 @@ async def get():
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
-    while True:
-        await websocket.send_json({"message": "Some message"})
-        sleep(0.1)
+    try:
+        while True:
+            await websocket.send_json({"velocity": 1, "time": 1})
+            await asyncio.sleep(1)
+    except WebSocketDisconnect:
+        websocket.remove(websocket)
+        
