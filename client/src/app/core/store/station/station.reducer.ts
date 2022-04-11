@@ -27,8 +27,9 @@ const onSocketClosed = (state: StationState) => ({
   ...state,
 });
 
-const onGetData = (state: StationState, props: { velocity: number; time: number }) => ({
+const onGetData = (state: StationState, props: { station: StationState }) => ({
   ...state,
-  velocity: state.velocity + props.velocity,
-  time: state.time + props.time,
+  lifebit: props.station.lifebit,
+  alarm: props.station.alarm,
+  module: props.station.module,
 });

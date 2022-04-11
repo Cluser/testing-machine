@@ -13,7 +13,7 @@ class Process(BaseModel):
     outside_temperature: int
 
 class Module(BaseModel):
-    id = int
+    id: int
     process: List[Process]
 
 class Station(BaseModel):
@@ -24,7 +24,7 @@ class Station(BaseModel):
 
 station = Station(
     lifebit = True,
-    alarm = [False, True],
+    alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
     module = [
         Module(
             id = 1,
@@ -77,5 +77,3 @@ station = Station(
     ]
 )
 
-
-station.module[0].process[0].spindle_velocity = 9999

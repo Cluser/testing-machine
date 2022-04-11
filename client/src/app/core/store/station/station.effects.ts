@@ -28,11 +28,11 @@ export class LoadDataEffects {
         this.subject.pipe(
           map((data: any) => ({
             type: getData.type,
-            velocity: data.module[0].process[0].spindle_velocity,
-            time: 2,
+            station: data,
           }))
         )
-      )
+      ),
+      tap((x) => console.log(x))
     )
   );
 
@@ -40,15 +40,9 @@ export class LoadDataEffects {
     this.actions$.pipe(
       ofType(closeSocket),
       tap(() => this.subject.complete()),
-      map((data: any) => ({
+      map(() => ({
         type: socketClosed.type,
       }))
     )
   );
-
-  // socketClosed$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(socketClosed)
-  //   )
-  // );
 }
