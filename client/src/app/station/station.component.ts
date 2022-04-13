@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { closeSocket, getStation, openSocket } from "src/app/core/store/station";
-import { AppState } from "src/app/core/store/states";
+import { IAppState } from "src/app/core/store/states";
 import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 
@@ -13,7 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 export class StationComponent implements OnInit {
   public station$: Observable<any>;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<IAppState>, private route: ActivatedRoute) {
     this.station$ = this.store.select(getStation);
   }
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { closeSocket, getModule, getStation, openSocket } from "src/app/core/store/station";
-import { AppState } from "src/app/core/store/states";
+import { getModule } from "src/app/core/store/station";
+import { IAppState, IModuleState } from "src/app/core/store/states";
 import { Observable } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 
 @Component({
@@ -12,26 +11,22 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
   styleUrls: ["./module.component.scss"],
 })
 export class ModuleComponent implements OnInit {
-  public module$: Observable<any>;
-  // public station$: Observable<any>;
-
-  // public id: number = 1;
-
+  private module$: Observable<any>;
+  private module: Partial<IModuleState> = {};
   public lineChart: ILineChart = { results: [] };
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<IAppState>) {
     this.module$ = this.store.select(getModule);
   }
 
   ngOnInit() {
-    // this.module$.subscribe((x) => console.log(x));
     this.initLineChart();
   }
 
   private initLineChart() {
+    this.lineChart.results.push({ name: "Spindle velocity", series: [] });
     this.module$.subscribe((x) => {
-      console.log(x);
-      this.lineChart.results.push({ name: "Spindle Velocity", series: [{ name: "1", value: x.process[0].spindle_velocity }] });
+      this.lineChart.results[0].series?.push({ name: "1", value: x.process[0].spindle_velocity });
     });
   }
 }

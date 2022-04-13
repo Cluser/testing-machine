@@ -1,6 +1,6 @@
 import { createReducer, on, props } from "@ngrx/store";
 import { closeSocket, getStationData, openSocket, socketClosed, socketOpened } from "./station.actions";
-import { StationState, initialState } from "./station.state";
+import { IStationState, initialState } from "./station.state";
 
 export const stationReducer = createReducer(
   initialState,
@@ -11,23 +11,23 @@ export const stationReducer = createReducer(
   on(getStationData, (state, props) => onGetStationData(state, props))
 );
 
-const onOpenSocket = (state: StationState) => ({
+const onOpenSocket = (state: IStationState) => ({
   ...state,
 });
 
-const onSocketOpened = (state: StationState) => ({
+const onSocketOpened = (state: IStationState) => ({
   ...state,
 });
 
-const onCloseSocket = (state: StationState) => ({
+const onCloseSocket = (state: IStationState) => ({
   ...state,
 });
 
-const onSocketClosed = (state: StationState) => ({
+const onSocketClosed = (state: IStationState) => ({
   ...state,
 });
 
-const onGetStationData = (state: StationState, props: { station: StationState }) => ({
+const onGetStationData = (state: IStationState, props: { station: IStationState }) => ({
   ...state,
   lifebit: props.station.lifebit,
   alarm: props.station.alarm,

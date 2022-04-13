@@ -1,8 +1,7 @@
-import { StationState } from "./station/station.state";
+import { IStationState } from "./station/station.state";
 
 export * from "./station/station.state";
 
-// Definicja stanu aplikacji
-export interface AppState {
-  stationState: StationState;
+export interface IAppState {
+  stationState: IStationState;
 }

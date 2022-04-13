@@ -1,4 +1,4 @@
-export interface ProcessState {
+export interface IProcessState {
   id: number;
   alarm?: boolean[];
   status?: number;
@@ -10,19 +10,19 @@ export interface ProcessState {
   outside_temperature?: number;
 }
 
-export interface ModuleState {
+export interface IModuleState {
   id: number;
   alarm?: boolean[];
-  process: ProcessState[];
+  process: IProcessState[];
 }
 
-export interface StationState {
+export interface IStationState {
   lifebit?: boolean;
   alarm?: boolean[];
-  module: ModuleState[];
+  module: IModuleState[];
 }
 
-export const initialState: StationState = {
+export const initialState: IStationState = {
   module: [
     {
       id: 1,
