@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { closeSocket, getStation, openSocket } from "src/app/core/store/station";
-import { IAppState } from "src/app/core/store/states";
-import { Observable } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { IAppState, IStationState } from "src/app/core/store/states";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
   selector: "app-station",
@@ -11,26 +10,34 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./station.component.scss"],
 })
 export class StationComponent implements OnInit {
-  public station$: Observable<any>;
+  private subscriptions = new Subscription();
 
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute) {
-    this.station$ = this.store.select(getStation);
-  }
+  constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {
+    this.initSubscriptions();
     this.openSocket();
-    this.station$.subscribe((station) => {});
   }
 
   ngOnDestroy() {
+    this.closeSubscriptions();
     this.closeSocket();
   }
 
-  public openSocket() {
+  private initSubscriptions() {
+    const station$: Observable<IStationState> = this.store.select(getStation);
+    this.subscriptions.add(station$.subscribe((station: IStationState) => {}));
+  }
+
+  private closeSubscriptions() {
+    this.subscriptions.unsubscribe();
+  }
+
+  private openSocket() {
     this.store.dispatch(openSocket());
   }
 
-  public closeSocket() {
+  private closeSocket() {
     this.store.dispatch(closeSocket());
   }
 }
