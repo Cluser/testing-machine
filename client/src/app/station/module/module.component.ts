@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { getModule } from "src/app/core/store/station";
-import { IAppState, IModuleState } from "src/app/core/store/states";
+import { IAppState } from "src/app/core/store/states";
 import { Observable } from "rxjs";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 
@@ -12,7 +12,6 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 })
 export class ModuleComponent implements OnInit {
   private module$: Observable<any>;
-  private module: Partial<IModuleState> = {};
   public lineChart: ILineChart = { results: [] };
 
   constructor(private store: Store<IAppState>) {
