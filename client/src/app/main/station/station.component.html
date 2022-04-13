@@ -1,6 +1,6 @@
 <p>grinding-station-one works!</p>
 
-<div *ngIf="id == 1">
+<div *ngIf="id == 0">
   <!-- Velocity: {{ stationVelocity$[0] | async }} Time: {{ stationTime$[0] | async }} -->
   <button (click)="openSocket()">Open socket</button>
   <button (click)="closeSocket()">Close socket</button>
@@ -14,7 +14,26 @@
     [xAxisLabel]="'Time'"
     [yAxisLabel]="'Value'"
     [timeline]="true"
-    [results]="lineChart"
+    [results]="lineChart[0].results"
+  >
+  </ngx-charts-line-chart>
+</div>
+
+<div *ngIf="id == 1">
+  <!-- Velocity: {{ stationVelocity$[1] | async }} Time: {{ stationTime$[1] | async }} -->
+  <button (click)="openSocket()">Open socket</button>
+  <button (click)="closeSocket()">Close socket</button>
+  <ngx-charts-line-chart
+    [view]="[1800, 500]"
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Time'"
+    [yAxisLabel]="'Value'"
+    [timeline]="true"
+    [results]="lineChart[0].results"
   >
   </ngx-charts-line-chart>
 </div>
@@ -33,7 +52,7 @@
     [xAxisLabel]="'Time'"
     [yAxisLabel]="'Value'"
     [timeline]="true"
-    [results]="lineChart"
+    [results]="lineChart[0].results"
   >
   </ngx-charts-line-chart>
 </div>

@@ -31,7 +31,7 @@ station = Station(
             process = [
                 Process(
                     id = 1,
-                    alarm = [False],
+                    alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
                     status = 5,
                     spindle_no = 1000,
                     time_left = 500,
@@ -47,7 +47,7 @@ station = Station(
             process = [
                 Process(
                     id = 1,
-                    alarm = [False],
+                    alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
                     status = 5,
                     spindle_no = 1000,
                     time_left = 500,
@@ -63,7 +63,7 @@ station = Station(
             process = [
                 Process(
                     id = 1,
-                    alarm = [False],
+                    alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
                     status = 5,
                     spindle_no = 1000,
                     time_left = 500,
