@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { getModule } from "src/app/core/store/station";
 import { IAppState, IModuleState } from "src/app/core/store/states";
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 
 @Component({
@@ -11,24 +12,31 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
   styleUrls: ["./module.component.scss"],
 })
 export class ModuleComponent implements OnInit {
-  private module$: Observable<IModuleState>;
-  private moduleSub$: Subscription;
+  private unsubscribe = new Subject<void>();
   public lineChart: ILineChart = { results: [{ name: "Spindle velocity", series: [] }] };
 
-  constructor(private store: Store<IAppState>) {
-    this.module$ = this.store.select(getModule);
-    this.moduleSub$ = this.module$.subscribe((module) => {
-      this.updateLineChart("0", module.process[0].spindle_velocity);
-    });
+  constructor(private store: Store<IAppState>) {}
+
+  ngOnInit() {
+    this.initSubscriptions();
   }
 
-  ngOnInit() {}
-
   ngOnDestroy() {
-    this.moduleSub$.unsubscribe();
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  private initSubscriptions() {
+    const module$: Observable<IModuleState> = this.store.select(getModule);
+    module$.pipe(takeUntil(this.unsubscribe)).subscribe((module: IModuleState) => this.onModuleUpdate(module));
+  }
+
+  private onModuleUpdate(module: IModuleState) {
+    this.updateLineChart("0", module.process[0].spindle_velocity);
   }
 
   private updateLineChart(name: string, value: number) {
-    this.lineChart.results[0].series?.push({ name: name, value: value });
+    const IDX_SPINDLE_VELOCITY_RESULT = 0;
+    this.lineChart.results[IDX_SPINDLE_VELOCITY_RESULT].series?.push({ name: name, value: value });
   }
 }
