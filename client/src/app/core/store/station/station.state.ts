@@ -25,8 +25,12 @@ export interface IStationState {
 export const initialState: IStationState = {
   module: [
     {
-      id: 1,
+      id: 0,
       process: [{ id: 1, spindle_velocity: 199 }],
+    },
+    {
+      id: 1,
+      process: [{ id: 1, spindle_velocity: 299 }],
     },
     {
       id: 2,

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { getModule } from "src/app/core/store/station";
 import { IAppState, IModuleState } from "src/app/core/store/states";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 
 @Component({
@@ -12,20 +12,23 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 })
 export class ModuleComponent implements OnInit {
   private module$: Observable<IModuleState>;
-  public lineChart: ILineChart = { results: [] };
+  private moduleSub$: Subscription;
+  public lineChart: ILineChart = { results: [{ name: "Spindle velocity", series: [] }] };
 
   constructor(private store: Store<IAppState>) {
     this.module$ = this.store.select(getModule);
-  }
-
-  ngOnInit() {
-    this.initLineChart();
-  }
-
-  private initLineChart() {
-    this.lineChart.results.push({ name: "Spindle velocity", series: [] });
-    this.module$.subscribe((x) => {
-      this.lineChart.results[0].series?.push({ name: "1", value: x.process[0].spindle_velocity });
+    this.moduleSub$ = this.module$.subscribe((module) => {
+      this.updateLineChart("0", module.process[0].spindle_velocity);
     });
+  }
+
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.moduleSub$.unsubscribe();
+  }
+
+  private updateLineChart(name: string, value: number) {
+    this.lineChart.results[0].series?.push({ name: name, value: value });
   }
 }
