@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
-import { closeSocket, getData, openSocket, socketClosed, socketOpened } from "./station.actions";
+import { closeSocket, getStationData, openSocket, socketClosed, socketOpened } from "./station.actions";
 import { map, mergeMap, tap } from "rxjs/operators";
 import { webSocket } from "rxjs/webSocket";
 
@@ -27,7 +27,7 @@ export class LoadDataEffects {
       mergeMap(() =>
         this.subject.pipe(
           map((data: any) => ({
-            type: getData.type,
+            type: getStationData.type,
             station: data,
           }))
         )

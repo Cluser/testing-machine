@@ -1,0 +1,17 @@
+<p>grinding-station-one works!</p>
+
+<!-- Velocity: {{ stationVelocity$[0] | async }} Time: {{ stationTime$[0] | async }} -->
+
+<ngx-charts-line-chart
+  [view]="[1800, 500]"
+  [legend]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [xAxis]="true"
+  [yAxis]="true"
+  [xAxisLabel]="'Time'"
+  [yAxisLabel]="'Value'"
+  [timeline]="true"
+  [results]="lineChart.results"
+>
+</ngx-charts-line-chart>
