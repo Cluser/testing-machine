@@ -2,8 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { getModule } from "src/app/core/store/station";
 import { IAppState, IModuleState } from "src/app/core/store/states";
-import { Observable, Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Observable, Subscription } from "rxjs";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 
 @Component({
@@ -12,23 +11,18 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
   styleUrls: ["./module.component.scss"],
 })
 export class ModuleComponent implements OnInit {
-  private unsubscribe = new Subject<void>();
+  private subscriptions = new Subscription();
   public lineChart: ILineChart = { results: [{ name: "Spindle velocity", series: [] }] };
 
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {
-    this.initSubscriptions();
+    const module$: Observable<IModuleState> = this.store.select(getModule);
+    this.subscriptions.add(module$.subscribe((module: IModuleState) => this.onModuleUpdate(module)));
   }
 
   ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-  }
-
-  private initSubscriptions() {
-    const module$: Observable<IModuleState> = this.store.select(getModule);
-    module$.pipe(takeUntil(this.unsubscribe)).subscribe((module: IModuleState) => this.onModuleUpdate(module));
+    this.subscriptions.unsubscribe();
   }
 
   private onModuleUpdate(module: IModuleState) {
