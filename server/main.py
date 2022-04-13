@@ -20,7 +20,7 @@ class Main():
             try:
                 plcOb.get_data()
             except:
-                input('Error')
+                input('PLC Connection error')
                 break
 
 

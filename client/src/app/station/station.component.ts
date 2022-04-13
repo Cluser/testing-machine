@@ -22,6 +22,10 @@ export class StationComponent implements OnInit {
     this.station$.subscribe((station) => {});
   }
 
+  ngOnDestroy() {
+    this.closeSocket();
+  }
+
   public openSocket() {
     this.store.dispatch(openSocket());
   }

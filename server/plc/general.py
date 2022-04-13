@@ -50,7 +50,7 @@ class Plc():
         end = time.time()
         print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')
 
-        return 5
+        
         
 
 
