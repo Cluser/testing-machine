@@ -1,0 +1,42 @@
+/*
+***********************************************************************
+*** Others
+***********************************************************************
+*/
+
+
+// Disable text selection
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.alert {
+  margin-top: 5px;
+}
+
+.form-control {
+    border:1px solid #a0b3b0;
+    border-radius:0;
+    background-color: transparent;
+
+    &:focus {
+      outline:0;
+      border-color: #1ab188;;
+      box-shadow: none;
+      background-color: transparent;
+    }
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 4px solid #42A948; /* green */
+}
+
+.ng-touched.ng-invalid:not(form), .ng-dirty.ng-invalid:not(form)  {
+  border-left: 4px solid #a94442; /* red */
+}
