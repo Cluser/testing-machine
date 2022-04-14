@@ -13,6 +13,7 @@ This project just started. It's still under development.
 ## What you can find here?
 - NgRx storage, NgRx Effects, NgRx Router Store
 - Websocket implementation
+- Mutli threading
 - CSS BEM methodology
 - Ngx Charts
 - Lazy loading routing with query parameters
