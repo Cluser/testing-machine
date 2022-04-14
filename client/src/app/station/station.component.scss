@@ -1,4 +1,4 @@
-.main {
+.station {
   width: 100%;
   height: 100%;
 
@@ -10,12 +10,11 @@
   row-gap: 0px;
 }
 
-.main__menu {
+.station__menu {
   background-color: rgb(13, 126, 13);
   grid-area: menu;
 }
 
-.main__view {
-  // background-color: rgb(62, 75, 62);
+.station__view {
   grid-area: view;
 }

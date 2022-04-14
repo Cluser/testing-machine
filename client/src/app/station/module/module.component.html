@@ -1,15 +1,9 @@
-<!-- Velocity: {{ stationVelocity$[0] | async }} Time: {{ stationTime$[0] | async }} -->
+<div class="module">
+  <div class="module__measurements">
+    <app-module-measurements></app-module-measurements>
+  </div>
 
-<ngx-charts-line-chart
-  [view]="[1800, 500]"
-  [legend]="true"
-  [showXAxisLabel]="true"
-  [showYAxisLabel]="true"
-  [xAxis]="true"
-  [yAxis]="true"
-  [xAxisLabel]="'Time'"
-  [yAxisLabel]="'Value'"
-  [timeline]="true"
-  [results]="lineChart.results"
->
-</ngx-charts-line-chart>
+  <div class="module__chart">
+    <app-module-chart></app-module-chart>
+  </div>
+</div>
