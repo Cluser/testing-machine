@@ -3,11 +3,11 @@ import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/core/store/states";
 
 @Component({
-  selector: "app-module-measurements",
-  templateUrl: "./module-measurements.component.html",
-  styleUrls: ["./module-measurements.component.scss"],
+  selector: "app-module-info",
+  templateUrl: "./module-info.component.html",
+  styleUrls: ["./module-info.component.scss"],
 })
-export class ModuleMeasurementsComponent implements OnInit {
+export class ModuleInfoComponent implements OnInit {
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {}
