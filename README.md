@@ -6,7 +6,7 @@ This project just started. It's still under development.
 
 ## Software architecture
 - Frontend - Angular 13
-- Backend - Python + FastAPI library
+- Backend - Python + FastAPI library + Snap7 for PLC communication
 - Database - MongoDB
 
 
