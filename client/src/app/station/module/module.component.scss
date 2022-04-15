@@ -13,23 +13,25 @@
 
 .module__info {
   grid-area: info;
-  background-color: red;
+  background-color: rgb(250, 250, 250);
 }
 
 .module__recipe {
   grid-area: recipe;
-  background-color: red;
+  background-color: rgb(250, 250, 250);
 }
 
 .module__sequence {
   grid-area: sequence;
-  background-color: black;
+  background-color: rgb(250, 250, 250);
 }
 
 .module__measurements {
   grid-area: measurements;
+  background-color: rgb(250, 250, 250);
 }
 
 .module__chart {
   grid-area: chart;
+  background-color: rgb(250, 250, 250);
 }

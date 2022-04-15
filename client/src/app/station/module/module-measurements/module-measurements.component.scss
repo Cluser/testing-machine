@@ -11,61 +11,65 @@
 }
 
 .variable {
+  text-align: center;
 }
 
 .variable--1 {
   grid-area: value1;
-  background-color: brown;
+  // background-color: brown;
 }
 
 .variable--2 {
   grid-area: value2;
-  background-color: gold;
+  // background-color: gold;
 }
 
 .variable--3 {
   grid-area: value3;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--4 {
   grid-area: value4;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--5 {
   grid-area: value5;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--6 {
   grid-area: value6;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--7 {
   grid-area: value7;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--8 {
   grid-area: value8;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--9 {
   grid-area: value9;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable--10 {
   grid-area: value10;
-  background-color: green;
+  // background-color: green;
 }
 
 .variable__name {
 }
 
 .variable__value {
+  position: relative;
+  top: 25%;
+  font-size: 2em;
   color: purple;
 }
