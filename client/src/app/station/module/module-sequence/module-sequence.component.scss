@@ -3,9 +3,38 @@
   height: 100%;
 
   display: grid;
-  grid-template-columns: 10%;
+  grid-template-columns: 100%;
   grid-template-rows: 10%;
-  grid-template-areas: "value1";
+  grid-template-areas: "type" "parameters";
   column-gap: 0px;
   row-gap: 0px;
+}
+
+.type {
+  grid-area: type;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.type__grinding {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49.5%;
+  height: 100%;
+  background-color: orange;
+}
+
+.type__test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49.5%;
+  height: 100%;
+  background-color: orange;
+}
+
+.parameters {
+  background-color: black;
 }

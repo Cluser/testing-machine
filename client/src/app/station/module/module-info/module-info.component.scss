@@ -1,3 +1,5 @@
+@import "../../../shared/styles/global.scss";
+
 .info {
   width: 100%;
   height: 100%;
@@ -15,7 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: orange;
+  background-color: $primary;
+  color: $neutralTheLightest;
 }
 
 .status--value {
@@ -23,6 +26,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $secondary;
+  color: $neutralTheLightest;
 }
 
 .spindleNo {
@@ -30,7 +35,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: orange;
+  background-color: $primary;
+  color: $neutralTheLightest;
 }
 
 .spindleNo--value {
@@ -38,4 +44,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: $secondary;
+  color: $neutralTheLightest;
 }
