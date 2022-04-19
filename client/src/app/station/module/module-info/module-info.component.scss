@@ -3,25 +3,39 @@
   height: 100%;
 
   display: grid;
-  grid-template-columns: 6% 6% 30% 10% 10%;
+  grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 100%;
-  grid-template-areas: "status statusVar . spindleNoText spindleNoVar";
+  grid-template-areas: "status statusValue spindle spindleValue";
   column-gap: 0px;
   row-gap: 0px;
 }
 
-.info__status--text {
-  grid-area: "statusText";
+.status {
+  grid-area: status;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
 }
 
-.info__status--var {
-  grid-area: "statusVar";
+.status--value {
+  grid-area: statusValue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.info__spindleNo--text {
-  grid-area: "spindleNoText";
+.spindleNo {
+  grid-area: spindle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
 }
 
-.info__spindleNo--var {
-  grid-area: "spindleNoVar";
+.spindleNo--value {
+  grid-area: spindleValue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
