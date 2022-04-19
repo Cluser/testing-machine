@@ -5,6 +5,7 @@ import { StationRoutingModule } from "./station-routing.module";
 import { MenuComponent } from "./menu/menu.component";
 import { ModuleComponent } from "./module/module.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { AgGridModule } from "ag-grid-angular";
 import { ModuleChartComponent } from "./module/module-chart/module-chart.component";
 import { ModuleMeasurementsComponent } from "./module/module-measurements/module-measurements.component";
 import { ModuleRecipeComponent } from "./module/module-recipe/module-recipe.component";
@@ -13,6 +14,6 @@ import { ModuleInfoComponent } from "./module/module-info/module-info.component"
 
 @NgModule({
   declarations: [StationComponent, MenuComponent, ModuleComponent, ModuleChartComponent, ModuleMeasurementsComponent, ModuleRecipeComponent, ModuleSequenceComponent, ModuleInfoComponent],
-  imports: [CommonModule, StationRoutingModule, NgxChartsModule],
+  imports: [CommonModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
 })
 export class StationModule {}
