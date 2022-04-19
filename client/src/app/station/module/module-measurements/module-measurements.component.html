@@ -1,12 +1,12 @@
 <div class="measurements">
   <div class="variable variable--1">
     <div class="variable__name">Obroty zespołu wrzeciona</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">{{ module.process![0].spindle_velocity }}</div>
   </div>
 
   <div class="variable variable--2">
     <div class="variable__name">Temperatura silnika</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">{{ module.process![0].motor_temperature }}</div>
   </div>
 
   <div class="variable variable--3">
@@ -21,31 +21,31 @@
 
   <div class="variable variable--5">
     <div class="variable__name">Temperatura otoczenia</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">{{ module.process![0].outside_temperature }}</div>
   </div>
 
   <div class="variable variable--6">
     <div class="variable__name">Obroty silnika</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">{{ module.process![0].motor_velocity }}</div>
   </div>
 
   <div class="variable variable--7">
     <div class="variable__name">Załączenie pompy on/off</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">ON</div>
   </div>
 
   <div class="variable variable--8">
     <div class="variable__name">Potwierdzenie ciśnienia on/off</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">ON</div>
   </div>
 
   <div class="variable variable--9">
     <div class="variable__name">Pomiar ciśnienia glikolu on/off</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">OFF</div>
   </div>
 
   <div class="variable variable--10">
     <div class="variable__name">Wentylacja stanowiska On/Off</div>
-    <div class="variable__value">10</div>
+    <div class="variable__value">OFF</div>
   </div>
 </div>
