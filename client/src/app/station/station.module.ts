@@ -11,9 +11,10 @@ import { ModuleMeasurementsComponent } from "./module/module-measurements/module
 import { ModuleRecipeComponent } from "./module/module-recipe/module-recipe.component";
 import { ModuleSequenceComponent } from "./module/module-sequence/module-sequence.component";
 import { ModuleInfoComponent } from "./module/module-info/module-info.component";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
-  declarations: [StationComponent, MenuComponent, ModuleComponent, ModuleChartComponent, ModuleMeasurementsComponent, ModuleRecipeComponent, ModuleSequenceComponent, ModuleInfoComponent],
+  declarations: [StationComponent, MenuComponent, ModuleComponent, ModuleChartComponent, ModuleMeasurementsComponent, ModuleRecipeComponent, ModuleSequenceComponent, ModuleInfoComponent, SettingsComponent],
   imports: [CommonModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
 })
 export class StationModule {}
