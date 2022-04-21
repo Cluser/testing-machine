@@ -19,10 +19,12 @@ export interface IModuleState {
 export interface IStationState {
   lifebit?: boolean;
   alarm?: boolean[];
+  timestamp?: number;
   module: IModuleState[];
 }
 
 export const initialState: IStationState = {
+  timestamp: 100,
   module: [
     {
       id: 0,

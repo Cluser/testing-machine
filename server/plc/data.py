@@ -19,12 +19,14 @@ class Module(BaseModel):
 class Station(BaseModel):
     lifebit: bool
     alarm: List[bool]
+    timestamp: int
     module: List[Module]
 
 
 station = Station(
     lifebit = True,
     alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
+    timestamp = 0,
     module = [
         Module(
             id = 1,

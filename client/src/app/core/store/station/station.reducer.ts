@@ -31,5 +31,6 @@ const onGetStationData = (state: IStationState, props: { station: IStationState 
   ...state,
   lifebit: props.station.lifebit,
   alarm: props.station.alarm,
+  timestamp: props.station.timestamp,
   module: props.station.module,
 });

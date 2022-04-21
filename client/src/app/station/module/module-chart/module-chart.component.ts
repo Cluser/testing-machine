@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { getModule } from "src/app/core/store/station";
-import { IAppState, IModuleState } from "src/app/core/store/states";
+import { IAppState, IChartState, IModuleState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
+import { getChartData } from "src/app/core/store/chart";
 
 @Component({
   selector: "app-module-chart",
@@ -25,22 +26,19 @@ export class ModuleChartComponent implements OnInit {
   }
 
   private initSubscriptions() {
-    const module$: Observable<IModuleState> = this.store.select(getModule);
-    this.subscriptions.add(module$.subscribe((module: IModuleState) => this.onModuleUpdate(module)));
+    const chart$: Observable<ILineChart> = this.store.select(getChartData);
+    this.subscriptions.add(chart$.subscribe((chart: ILineChart) => this.onChartUpdate(chart)));
   }
 
   private closeSubscriptions() {
     this.subscriptions.unsubscribe();
   }
 
-  private onModuleUpdate(module: IModuleState) {
-    let myDate = new Date();
-    this.updateLineChart(myDate.getTime().toString(), module.process[0].spindle_velocity);
+  private onChartUpdate(chart: ILineChart) {
+    this.updateLineChart(chart);
   }
 
-  private updateLineChart(name: string, value: number) {
-    const IDX_SPINDLE_VELOCITY_RESULT = 0;
-    this.lineChart.results[IDX_SPINDLE_VELOCITY_RESULT].series?.push({ name: name, value: value });
-    this.lineChart.results = [...this.lineChart.results];
+  private updateLineChart(chart: ILineChart) {
+    this.lineChart = chart;
   }
 }
