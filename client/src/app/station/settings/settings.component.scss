@@ -1,0 +1,32 @@
+.settings {
+  width: 100%;
+  height: 100%;
+  margin: 1%;
+
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 6% 30% 64%;
+  grid-template-areas: "recipe recipe" "sequence image" "sequence parameters";
+  column-gap: 1%;
+  row-gap: 1%;
+}
+
+.settings__recipe {
+  grid-area: recipe;
+  background-color: rgb(250, 250, 250);
+}
+
+.settings__sequence {
+  grid-area: sequence;
+  background-color: rgb(250, 250, 250);
+}
+
+.settings__image {
+  grid-area: image;
+  background-color: rgb(250, 250, 250);
+}
+
+.settings__parameters {
+  grid-area: parameters;
+  background-color: rgb(250, 250, 250);
+}
