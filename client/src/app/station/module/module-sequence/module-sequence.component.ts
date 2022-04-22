@@ -9,6 +9,7 @@ import { ColDef } from "ag-grid-community";
   styleUrls: ["./module-sequence.component.scss"],
 })
 export class ModuleSequenceComponent implements OnInit {
+  public selectedSequence: string = "grinding";
   public columnDefs: ColDef[] = [
     { field: "step" },
     { field: "velocity" },

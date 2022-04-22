@@ -1,13 +1,13 @@
 <div class="sequence">
   <div class="type">
-    <button class="type__grinding" [class.type--selected]="'a' == 'a'">Docieranie</button>
-    <button class="type__test">Testowanie</button>
+    <button class="type__grinding" [class.type--selected]="selectedSequence == 'grinding'" (click)="selectedSequence = 'grinding'">Docieranie</button>
+    <button class="type__test" [class.type--selected]="selectedSequence == 'testing'" (click)="selectedSequence = 'testing'">Testowanie</button>
   </div>
 
   <div class="parameters">
-    <div class="parameters__grinding">
+    <div class="parameters__grinding" *ngIf="selectedSequence === 'grinding'">
       <ag-grid-angular style="width: 100%; height: 100%" class="ag-theme-alpine" [rowData]="rowData" [columnDefs]="columnDefs"> </ag-grid-angular>
     </div>
-    <div class="parameters__testing"></div>
+    <div class="parameters__testing" *ngIf="selectedSequence === 'testing'"></div>
   </div>
 </div>
