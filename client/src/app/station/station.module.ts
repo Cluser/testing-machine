@@ -11,14 +11,30 @@ import { ModuleMeasurementsComponent } from "./module/module-measurements/module
 import { ModuleRecipeComponent } from "./module/module-recipe/module-recipe.component";
 import { ModuleSequenceComponent } from "./module/module-sequence/module-sequence.component";
 import { ModuleInfoComponent } from "./module/module-info/module-info.component";
-import { SettingsComponent } from './settings/settings.component';
-import { SettingsSequenceComponent } from './settings/settings-sequence/settings-sequence.component';
-import { SettingsImageComponent } from './settings/settings-image/settings-image.component';
-import { SettingsParametersComponent } from './settings/settings-parameters/settings-parameters.component';
-import { SettingsRecipeComponent } from './settings/settings-recipe/settings-recipe.component';
+import { SettingsComponent } from "./settings/settings.component";
+import { SettingsSequenceComponent } from "./settings/settings-sequence/settings-sequence.component";
+import { SettingsImageComponent } from "./settings/settings-image/settings-image.component";
+import { SettingsParametersComponent } from "./settings/settings-parameters/settings-parameters.component";
+import { SettingsRecipeComponent } from "./settings/settings-recipe/settings-recipe.component";
+import { FileUploadDirective } from "../shared/directives/file-upload.directive";
 
 @NgModule({
-  declarations: [StationComponent, MenuComponent, ModuleComponent, ModuleChartComponent, ModuleMeasurementsComponent, ModuleRecipeComponent, ModuleSequenceComponent, ModuleInfoComponent, SettingsComponent, SettingsSequenceComponent, SettingsImageComponent, SettingsParametersComponent, SettingsRecipeComponent],
+  declarations: [
+    StationComponent,
+    MenuComponent,
+    ModuleComponent,
+    ModuleChartComponent,
+    ModuleMeasurementsComponent,
+    ModuleRecipeComponent,
+    ModuleSequenceComponent,
+    ModuleInfoComponent,
+    SettingsComponent,
+    SettingsSequenceComponent,
+    SettingsImageComponent,
+    SettingsParametersComponent,
+    SettingsRecipeComponent,
+    FileUploadDirective,
+  ],
   imports: [CommonModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
 })
 export class StationModule {}
