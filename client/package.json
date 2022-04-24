@@ -26,6 +26,7 @@
     "@swimlane/ngx-charts": "^20.1.0",
     "ag-grid-angular": "^27.2.0",
     "ag-grid-community": "^27.2.0",
+    "ngx-simple-modal": "^1.4.17",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

@@ -1,7 +1,7 @@
 <div class="recipe">
   <div class="recipe__name">Referencja</div>
-  <div class="recipe__add">+</div>
-  <div class="recipe__remove">-</div>
+  <div class="recipe__add" (click)="openAddRecipeModal()">+</div>
+  <div class="recipe__remove" (click)="openRemoveModal()">-</div>
   <select class="recipe__selected">
     <option value="">Wybierz referencję</option>
     <option value="InlineMASTER1">InlineMASTER 1500RPM</option>

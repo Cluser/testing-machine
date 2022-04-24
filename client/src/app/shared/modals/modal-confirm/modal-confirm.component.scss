@@ -1,0 +1,23 @@
+@import "../../../shared/styles/global.scss";
+
+.modal-content {
+  margin-top: 5%;
+  max-width: none;
+  width: 50%;
+}
+
+.modal-header {
+  background-color: $primary;
+  color: $neutralTheLightest;
+  //   font-family: $headingFont !important;
+  //   font-weight: 0;
+}
+
+.modal-body {
+  font-family: $regularFont;
+  font-weight: 0;
+}
+
+.modal-footer {
+  border: none;
+}
