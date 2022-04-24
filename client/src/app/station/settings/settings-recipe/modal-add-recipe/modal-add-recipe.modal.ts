@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
 import { SimpleModalComponent } from "ngx-simple-modal";
+import { IRecipe } from "src/app/shared/interfaces/IRecipe";
 
 @Component({
   selector: "app-modal-add-recipe",
   templateUrl: "modal-add-recipe.component.html",
   styleUrls: ["./modal-add-recipe.component.scss"],
 })
-export class ModalAddRecipeComponent extends SimpleModalComponent<null, string> {
+export class ModalAddRecipeComponent extends SimpleModalComponent<null, IRecipe> {
   constructor() {
     super();
   }
@@ -14,9 +15,8 @@ export class ModalAddRecipeComponent extends SimpleModalComponent<null, string> 
   ngOnInit() {}
 
   public confirm() {
-    // we set modal result as true on click on confirm button,
-    // then we can get modal result from caller code
-    this.result = "test";
+    const recipe: IRecipe = { name: "ddd", step: [] };
+    this.result = recipe;
     this.close();
   }
 }
