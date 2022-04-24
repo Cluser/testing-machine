@@ -5,4 +5,5 @@ import { IRecipeState } from "./recipe.state";
 
 export const getRecipeState = (state: IAppState) => state.recipeState;
 
-export const getRecipetData = createSelector(getRecipeState, selectRouteParams, (state: IRecipeState, { id }) => state.recipe[id]);
+// export const getRecipe = createSelector(getRecipeState, (state: IRecipeState, props: { id }) => state.recipe[id]);
+export const getRecipesData = createSelector(getRecipeState, (state: IRecipeState) => state);
