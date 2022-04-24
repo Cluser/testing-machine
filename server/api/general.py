@@ -21,6 +21,7 @@ class Api():
         )
 
         self.client.include_router(endpoints.measurement.router)
+        self.client.include_router(endpoints.recipe.router)
 
     def run(self):
         uvicorn.run(self.client, host="0.0.0.0", port=8000)
