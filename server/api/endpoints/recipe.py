@@ -16,12 +16,12 @@ async def post(recipe: Recipe):
     _id = db.client.recipes.insert_one(jsonable_encoder(recipe))
     return serializeList(db.client.recipes.find({"_id": _id.inserted_id}))
 
-@router.put("/{id}", tags=["Recipe"])
+@router.put("/recipe/{id}", tags=["Recipe"])
 async def put(id: str, recipe: Recipe):
     db.client.recipes.find_one_and_update({"_id": ObjectId(id)}, {"$set": jsonable_encoder(recipe)})
     return serializeList(db.client.recipes.find({"_id": ObjectId(id)}))
 
-@router.delete("/{id}", tags=["Recipe"])
+@router.delete("/recipe/{id}", tags=["Recipe"])
 async def delete(id: str):
     db.client.recipes.find_one_and_delete({"_id": ObjectId(id)})
     return {"status": "ok"}

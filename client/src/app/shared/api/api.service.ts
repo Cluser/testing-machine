@@ -6,5 +6,5 @@ import * as endpoint from "./endpoints/";
   providedIn: "root",
 })
 export class ApiService {
-  constructor(public measurement: endpoint.MeasurementService) {}
+  constructor(public measurement: endpoint.MeasurementService, public recipe: endpoint.RecipeService) {}
 }
