@@ -16,7 +16,7 @@ import { SettingsSequenceComponent } from "./settings/settings-sequence/settings
 import { SettingsImageComponent } from "./settings/settings-image/settings-image.component";
 import { SettingsParametersComponent } from "./settings/settings-parameters/settings-parameters.component";
 import { SettingsRecipeComponent } from "./settings/settings-recipe/settings-recipe.component";
-import { FileUploadDirective } from "../shared/directives/file-upload.directive";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -33,8 +33,7 @@ import { FileUploadDirective } from "../shared/directives/file-upload.directive"
     SettingsImageComponent,
     SettingsParametersComponent,
     SettingsRecipeComponent,
-    FileUploadDirective,
   ],
-  imports: [CommonModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
+  imports: [CommonModule, SharedModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
 })
 export class StationModule {}
