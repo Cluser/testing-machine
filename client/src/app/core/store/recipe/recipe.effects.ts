@@ -12,8 +12,8 @@ export class RecipeEffects {
   addRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addRecipe),
-      mergeMap(() =>
-        this.apiService.recipe.post().pipe(
+      mergeMap((data) =>
+        this.apiService.recipe.post(data["recipe"]).pipe(
           map((recipe) => ({
             type: recipeAdded.type,
             recipe: recipe,

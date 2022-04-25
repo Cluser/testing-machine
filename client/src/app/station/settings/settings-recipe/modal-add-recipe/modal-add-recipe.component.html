@@ -1,10 +1,22 @@
 <div class="modal-content">
-  <div class="modal-header">Dodawanie referencji</div>
-  <div class="modal-body">
-    <input placeholder="Nazwa referencji" />
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-danger" (click)="close()">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="modal-header">Dodawanie referencji</div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-2">
+          <div class="row">
+            <label for="first-name">Nazwa referencji </label>
+            <input id="first-name" type="text" formControlName="recipeName" />
+            <!-- <app-validation-error [control]="form.controls['recipeName']"></app-validation-error> -->
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-danger" (click)="close()">Cancel</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary" (click)="onSubmit()">OK</button>
+    </div>
+  </form>
 </div>

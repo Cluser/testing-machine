@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { IRecipe } from "../../interfaces/IRecipe";
 
 @Injectable({
   providedIn: "root",
@@ -15,8 +16,8 @@ export class RecipeService {
     return this.httpClient.get<any>(this.endpointUrl);
   }
 
-  public post(): Observable<any> {
-    return this.httpClient.post<any>(this.endpointUrl, { name: "test", step: [] });
+  public post(recipe: IRecipe): Observable<any> {
+    return this.httpClient.post<any>(this.endpointUrl, recipe);
   }
 
   public delete(id: string): Observable<any> {

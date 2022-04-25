@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { SimpleModalService } from "ngx-simple-modal";
-import { addRecipe, getRecipesData, IRecipeState, removeRecipe } from "src/app/core/store/recipe";
+import { addRecipe, getRecipes, getRecipesData, IRecipeState, removeRecipe } from "src/app/core/store/recipe";
 import { IAppState } from "src/app/core/store/states";
 import { ModalConfirmComponent } from "src/app/shared/modals/modal-confirm/modal-confirm.modal";
 import { ModalAddRecipeComponent } from "./modal-add-recipe/modal-add-recipe.modal";
@@ -14,11 +14,13 @@ import { Observable, Subscription } from "rxjs";
 })
 export class SettingsRecipeComponent implements OnInit {
   private subscriptions = new Subscription();
+  public recipeState: IRecipeState = { recipe: [] };
 
   constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService) {}
 
   ngOnInit(): void {
     this.initSubscriptions();
+    this.getRecipes();
   }
 
   ngOnDestroy(): void {
@@ -28,14 +30,19 @@ export class SettingsRecipeComponent implements OnInit {
   private initSubscriptions() {
     const recipes$: Observable<IRecipeState> = this.store.select(getRecipesData);
     this.subscriptions.add(
-      recipes$.subscribe((recipes: IRecipeState) => {
-        console.log(recipes);
+      recipes$.subscribe((recipeState: IRecipeState) => {
+        this.recipeState = recipeState;
+        console.log(recipeState);
       })
     );
   }
 
   private closeSubscriptions() {
     this.subscriptions.unsubscribe();
+  }
+
+  private getRecipes() {
+    this.store.dispatch(getRecipes());
   }
 
   public openAddRecipeModal(): void {

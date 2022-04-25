@@ -3,8 +3,6 @@
   <div class="recipe__add" (click)="openAddRecipeModal()">+</div>
   <div class="recipe__remove" (click)="openRemoveModal()">-</div>
   <select class="recipe__selected">
-    <option value="">Wybierz referencję</option>
-    <option value="InlineMASTER1">InlineMASTER 1500RPM</option>
-    <option value="InlineMASTER2">InlineMASTER 1000RPM</option>
+    <option *ngFor="let recipe of recipeState.recipe" [value]="recipe.name">{{ recipe.name }}</option>
   </select>
 </div>

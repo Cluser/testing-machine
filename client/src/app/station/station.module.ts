@@ -17,6 +17,8 @@ import { SettingsImageComponent } from "./settings/settings-image/settings-image
 import { SettingsParametersComponent } from "./settings/settings-parameters/settings-parameters.component";
 import { SettingsRecipeComponent } from "./settings/settings-recipe/settings-recipe.component";
 import { SharedModule } from "../shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ModalAddRecipeComponent } from "./settings/settings-recipe/modal-add-recipe/modal-add-recipe.modal";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { SharedModule } from "../shared/shared.module";
     SettingsImageComponent,
     SettingsParametersComponent,
     SettingsRecipeComponent,
+    ModalAddRecipeComponent,
   ],
-  imports: [CommonModule, SharedModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([])],
+  imports: [CommonModule, SharedModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([]), FormsModule, ReactiveFormsModule],
 })
 export class StationModule {}

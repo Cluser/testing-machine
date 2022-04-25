@@ -33,8 +33,8 @@ export class LoadDataEffects {
             station: data,
           }))
         )
-      ),
-      tap((x) => console.log(x))
+      )
+      // tap((x) => console.log(x))
     )
   );
 
