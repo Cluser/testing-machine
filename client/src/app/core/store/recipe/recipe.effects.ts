@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
 import { map, mergeMap, tap } from "rxjs/operators";
-import { addRecipe, getRecipes, recipeAdded, recipeRemoved, recipesReceived, removeRecipe } from "./recipe.actions";
+import { addRecipe, changeEditRecipe, editRecipeChanged, getRecipes, recipeAdded, recipeRemoved, recipesReceived, removeRecipe } from "./recipe.actions";
 
 // Efect wykonuje sie zawsze po reducerze
 @Injectable()
@@ -49,8 +49,8 @@ export class RecipeEffects {
   removeRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(removeRecipe),
-      mergeMap((id) =>
-        this.apiService.recipe.delete(id.id).pipe(
+      mergeMap((data) =>
+        this.apiService.recipe.delete(data.id).pipe(
           map((recipe) => ({
             type: recipeRemoved.type,
             recipe: recipe,
@@ -65,6 +65,15 @@ export class RecipeEffects {
       ofType(recipeRemoved),
       map(() => ({
         type: getRecipes.type,
+      }))
+    )
+  );
+
+  changeEditRecipe$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(changeEditRecipe),
+      map(() => ({
+        type: editRecipeChanged.type,
       }))
     )
   );

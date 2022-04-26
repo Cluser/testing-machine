@@ -16,7 +16,7 @@ export class RecipeService {
     return this.httpClient.get<any>(this.endpointUrl);
   }
 
-  public post(recipe: IRecipe): Observable<any> {
+  public post(recipe: Partial<IRecipe>): Observable<any> {
     return this.httpClient.post<any>(this.endpointUrl, recipe);
   }
 
