@@ -5,11 +5,11 @@ class Step(BaseModel):
     velocity: int
     time: int
     oilFogTon: int
-    oilFogTog: int
+    oilFogTof: int
 
 class Recipe(BaseModel):
     name: str
-    step: List[Step]
+    steps: List[Step]
 
 
 

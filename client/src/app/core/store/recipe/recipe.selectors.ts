@@ -5,4 +5,6 @@ import { IRecipeState } from "./recipe.state";
 export const getRecipeState = (state: IAppState) => state.recipeState;
 
 export const getRecipesData = createSelector(getRecipeState, (state: IRecipeState) => state);
+
 export const getRecipeEditData = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit);
+export const getRecipeEditSteps = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit.steps);

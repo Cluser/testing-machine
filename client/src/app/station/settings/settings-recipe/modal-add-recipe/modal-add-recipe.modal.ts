@@ -20,7 +20,7 @@ export class ModalAddRecipeComponent extends SimpleModalComponent<null, Partial<
   ngOnInit() {}
 
   public onSubmit() {
-    const recipe: Partial<IRecipe> = { name: this.form.value.recipeName, step: [] };
+    const recipe: Partial<IRecipe> = { name: this.form.value.recipeName, steps: [] };
     this.result = recipe;
     this.close();
   }

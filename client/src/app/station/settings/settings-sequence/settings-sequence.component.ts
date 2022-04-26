@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { ColDef } from "ag-grid-community";
+import { Store } from "@ngrx/store";
+import { IAppState } from "src/app/core/store/states";
+import { Observable, Subscription } from "rxjs";
+import { getRecipeEditSteps } from "src/app/core/store/recipe";
+import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
+import { GridOptions } from "ag-grid-community";
 
 @Component({
   selector: "app-settings-sequence",
@@ -7,20 +12,34 @@ import { ColDef } from "ag-grid-community";
   styleUrls: ["./settings-sequence.component.scss"],
 })
 export class SettingsSequenceComponent implements OnInit {
-  public columnDefs: ColDef[] = [{ field: "step" }, { field: "velocity" }, { field: "stepTime" }, { field: "oilFogTon" }, { field: "oilFogTof" }];
+  private subscriptions = new Subscription();
+  public grid?: GridOptions;
 
-  public rowData = [
-    { step: 1, velocity: "10000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 2, velocity: "15000", stepTime: 20, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 4, velocity: "12000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 5, velocity: "10000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 6, velocity: "15000", stepTime: 20, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 7, velocity: "12000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 8, velocity: "10000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 9, velocity: "15000", stepTime: 20, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-    { step: 10, velocity: "12000", stepTime: 10, temperature1: true, temperature2: true, temperatureLimit: 40, oilFogTon: 21, oilFogTof: 540 },
-  ];
-  constructor() {}
+  constructor(private store: Store<IAppState>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.closeSubscriptions();
+  }
+
+  private initSubscriptions() {
+    const steps$: Observable<any> = this.store.select(getRecipeEditSteps);
+    this.subscriptions.add(
+      steps$.subscribe((steps: IRecipeStep[]) => {
+        this.grid?.api?.setRowData(steps);
+      })
+    );
+  }
+
+  private closeSubscriptions() {
+    this.subscriptions.unsubscribe();
+  }
+
+  public onGridReady(grid: GridOptions) {
+    this.grid = grid;
+    this.grid?.api?.setColumnDefs([{ field: "step", valueGetter: "node.rowIndex + 1" }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }]);
+  }
 }
