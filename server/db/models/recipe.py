@@ -9,6 +9,7 @@ class Step(BaseModel):
 
 class Recipe(BaseModel):
     name: str
+    temperatureLimit: int
     steps: List[Step]
 
 

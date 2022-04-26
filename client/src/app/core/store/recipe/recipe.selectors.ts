@@ -8,3 +8,5 @@ export const getRecipesData = createSelector(getRecipeState, (state: IRecipeStat
 
 export const getRecipeEditData = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit);
 export const getRecipeEditSteps = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit.steps);
+export const getRecipeEditName = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit.name);
+export const getRecipeEditTemperatureLimit = createSelector(getRecipeState, (state: IRecipeState) => state.recipeEdit.temperatureLimit);
