@@ -64,6 +64,6 @@ export class SettingsRecipeComponent implements OnInit {
   }
 
   public compareFn(optionOne: any, optionTwo: any): boolean {
-    return optionOne._id === optionTwo._id;
+    return optionOne?._id === optionTwo?._id;
   }
 }

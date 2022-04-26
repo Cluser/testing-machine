@@ -1,7 +1,7 @@
 <div class="parameters">
   <div class="parameter__name">Nazwa wrzeciona</div>
-  <div class="parameter__value">{{ name }}</div>
+  <input class="parameter__value" (ngModelChange)="changeRecipeName($event)" [(ngModel)]="name" />
 
   <div class="parameter__name2">Limit temperatury</div>
-  <div class="parameter__value2">{{ temperatureLimit }}</div>
+  <input class="parameter__value2" (ngModelChange)="changeRecipeTemperatureLimit($event)" [(ngModel)]="temperatureLimit" />
 </div>

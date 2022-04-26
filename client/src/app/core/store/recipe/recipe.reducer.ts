@@ -1,6 +1,17 @@
 import { createReducer, on, props } from "@ngrx/store";
 import { IRecipe } from "src/app/shared/interfaces/IRecipe";
-import { addRecipe, changeEditRecipe, editRecipeChanged, getRecipes, recipeAdded, recipeRemoved, recipesReceived, removeRecipe } from "./recipe.actions";
+import {
+  addRecipe,
+  changeEditRecipe,
+  changeRecipeName,
+  changeRecipeTemperatureLimit,
+  editRecipeChanged,
+  getRecipes,
+  recipeAdded,
+  recipeRemoved,
+  recipesReceived,
+  removeRecipe,
+} from "./recipe.actions";
 import { IRecipeState, initialRecipeState } from "./recipe.state";
 
 export const recipeReducer = createReducer(
@@ -12,7 +23,9 @@ export const recipeReducer = createReducer(
   on(getRecipes, (state) => onGetRecipes(state)),
   on(recipesReceived, (state, props) => onRecipesReceived(state, props)),
   on(changeEditRecipe, (state, props) => onChangeEditRecipe(state, props)),
-  on(editRecipeChanged, (state) => onEditRecipeChanged(state))
+  on(editRecipeChanged, (state) => onEditRecipeChanged(state)),
+  on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
+  on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props))
 );
 
 const onAddRecipe = (state: IRecipeState, props: { recipe: Partial<IRecipe> }) => ({
@@ -47,4 +60,20 @@ const onChangeEditRecipe = (state: IRecipeState, props: { recipeEdit: IRecipe })
 
 const onEditRecipeChanged = (state: IRecipeState) => ({
   ...state,
+});
+
+const onChangeRecipeName = (state: IRecipeState, props: { name: string }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    name: props.name,
+  },
+});
+
+const onChangeRecipeTemperatureLimit = (state: IRecipeState, props: { temperatureLimit: number }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    temperatureLimit: props.temperatureLimit,
+  },
 });

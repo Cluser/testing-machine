@@ -17,9 +17,7 @@ export class SettingsSequenceComponent implements OnInit {
 
   constructor(private store: Store<IAppState>) {}
 
-  ngOnInit(): void {
-    this.initSubscriptions();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.closeSubscriptions();
@@ -41,5 +39,6 @@ export class SettingsSequenceComponent implements OnInit {
   public onGridReady(grid: GridOptions) {
     this.grid = grid;
     this.grid?.api?.setColumnDefs([{ field: "step", valueGetter: "node.rowIndex + 1" }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }]);
+    this.initSubscriptions();
   }
 }
