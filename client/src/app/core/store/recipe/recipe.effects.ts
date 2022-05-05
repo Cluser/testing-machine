@@ -42,14 +42,15 @@ export class RecipeEffects {
   recipeRemoved$ = createEffect(() =>
     this.actions$.pipe(
       ofType(recipeRemoved),
-      map(() => getRecipes())
+      concatLatestFrom(() => this.store$.select((appState) => appState.recipeState.recipe)),
+      map((data) => data[1]),
+      concatMap((data) => [getRecipes(), changeEditRecipe({ recipeEdit: data[0] })])
     )
   );
 
   changeEditRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(changeEditRecipe),
-      tap((data) => console.log(data)),
       map(() => editRecipeChanged())
     )
   );
@@ -57,7 +58,7 @@ export class RecipeEffects {
   saveRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(saveRecipe),
-      concatLatestFrom(() => this.store$.select((getRecipeEditData) => getRecipeEditData.recipeState.recipeEdit)),
+      concatLatestFrom(() => this.store$.select((appState) => appState.recipeState.recipeEdit)),
       map((data) => data[1]),
       switchMap((data) => this.apiService.recipe.put(data._id!, data).pipe(map(() => recipeSaved())))
     )
