@@ -19,7 +19,7 @@ export interface IModuleState {
 export interface IStationState {
   lifebit?: boolean;
   alarm?: boolean[];
-  timestamp?: number;
+  timestamp: number;
   module: IModuleState[];
 }
 

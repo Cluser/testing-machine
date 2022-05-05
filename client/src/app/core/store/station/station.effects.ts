@@ -17,24 +17,14 @@ export class LoadDataEffects {
   openSocket$ = createEffect(() =>
     this.actions$.pipe(
       ofType(openSocket),
-      map(() => ({
-        type: socketOpened.type,
-      }))
+      map(() => socketOpened())
     )
   );
 
   socketOpened$ = createEffect(() =>
     this.actions$.pipe(
       ofType(socketOpened),
-      mergeMap(() =>
-        this.subject.pipe(
-          map((data: any) => ({
-            type: getStationData.type,
-            station: data,
-          }))
-        )
-      )
-      // tap((x) => console.log(x))
+      mergeMap(() => this.subject.pipe(map((data: any) => getStationData({ station: data }))))
     )
   );
 
@@ -42,23 +32,22 @@ export class LoadDataEffects {
     this.actions$.pipe(
       ofType(closeSocket),
       tap(() => this.subject.complete()),
-      map(() => ({
-        type: socketClosed.type,
-      }))
+      map(() => socketClosed())
     )
   );
 
   getStationData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getStationData),
-      map((data) => ({
-        type: addChartData.type,
-        chartData: [
-          { name: data.station.timestamp, value: data.station.module[0].process[0].spindle_velocity },
-          { name: data.station.timestamp, value: data.station.module[1].process[0].spindle_velocity },
-          { name: data.station.timestamp, value: data.station.module[2].process[0].spindle_velocity },
-        ],
-      }))
+      map((data) =>
+        addChartData({
+          chartData: [
+            { name: data.station.timestamp.toString(), value: data.station.module[0].process[0].spindle_velocity },
+            { name: data.station.timestamp.toString(), value: data.station.module[1].process[0].spindle_velocity },
+            { name: data.station.timestamp.toString(), value: data.station.module[2].process[0].spindle_velocity },
+          ],
+        })
+      )
     )
   );
 }
