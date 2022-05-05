@@ -4,4 +4,6 @@
 
   <div class="parameter__name2">Limit temperatury</div>
   <input class="parameter__value2" (ngModelChange)="changeRecipeTemperatureLimit($event)" [(ngModel)]="temperatureLimit" />
+
+  <button (click)="saveRecipe()">Save</button>
 </div>

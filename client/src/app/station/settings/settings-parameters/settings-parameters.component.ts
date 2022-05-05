@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
-import { changeRecipeName, changeRecipeTemperatureLimit, getRecipeEditName, getRecipeEditTemperatureLimit } from "src/app/core/store/recipe";
+import { changeRecipeName, changeRecipeTemperatureLimit, getRecipeEditName, getRecipeEditTemperatureLimit, saveRecipe } from "src/app/core/store/recipe";
 import { IAppState } from "src/app/core/store/states";
 
 @Component({
@@ -53,5 +53,9 @@ export class SettingsParametersComponent implements OnInit {
 
   public changeRecipeTemperatureLimit(temperatureLimit: number) {
     this.store.dispatch(changeRecipeTemperatureLimit({ temperatureLimit: temperatureLimit }));
+  }
+
+  public saveRecipe(): void {
+    this.store.dispatch(saveRecipe());
   }
 }

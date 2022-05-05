@@ -18,3 +18,6 @@ export const recipeNameChanged = createAction("[Settings page] Recipe name chang
 
 export const changeRecipeTemperatureLimit = createAction("[Settings page] Change recipe temperature limit", props<{ temperatureLimit: number }>());
 export const recipeTemperatureLimitChanged = createAction("[Settings page] Recipe temperature limit changed");
+
+export const saveRecipe = createAction("[Settings page] Save recipe");
+export const recipeSaved = createAction("[Recipe store] Recipe saved");

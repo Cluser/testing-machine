@@ -11,6 +11,7 @@ import {
   recipeRemoved,
   recipesReceived,
   removeRecipe,
+  saveRecipe,
 } from "./recipe.actions";
 import { IRecipeState, initialRecipeState } from "./recipe.state";
 
@@ -25,7 +26,8 @@ export const recipeReducer = createReducer(
   on(changeEditRecipe, (state, props) => onChangeEditRecipe(state, props)),
   on(editRecipeChanged, (state) => onEditRecipeChanged(state)),
   on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
-  on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props))
+  on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props)),
+  on(saveRecipe, (state) => onSaveRecipe(state))
 );
 
 const onAddRecipe = (state: IRecipeState, props: { recipe: Partial<IRecipe> }) => ({
@@ -76,4 +78,9 @@ const onChangeRecipeTemperatureLimit = (state: IRecipeState, props: { temperatur
     ...state.recipeEdit,
     temperatureLimit: props.temperatureLimit,
   },
+});
+
+const onSaveRecipe = (state: IRecipeState) => ({
+  ...state,
+  recipe: state.recipe.map((recipe: any) => (recipe._id == state.recipeEdit._id ? state.recipeEdit : recipe)),
 });
