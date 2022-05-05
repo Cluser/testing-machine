@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
-import { map, mergeMap, concatMap, switchMap, withLatestFrom, tap } from "rxjs/operators";
+import { map, mergeMap, concatMap, switchMap, tap } from "rxjs/operators";
 import { addRecipe, changeEditRecipe, editRecipeChanged, getRecipes, recipeAdded, recipeRemoved, recipeSaved, recipesReceived, removeRecipe, saveRecipe } from "./recipe.actions";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../states";
-import { getRecipeEditData } from "./recipe.selectors";
 
 // Efect wykonuje sie zawsze po reducerze
 @Injectable()
@@ -58,9 +57,9 @@ export class RecipeEffects {
   saveRecipe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(saveRecipe),
-      tap((data) => console.log(data)),
-      withLatestFrom(this.store$.select(getRecipeEditData)),
-      switchMap((data) => this.apiService.recipe.put(data[1]._id!, data[1]).pipe(map(() => recipeSaved())))
+      concatLatestFrom(() => this.store$.select((getRecipeEditData) => getRecipeEditData.recipeState.recipeEdit)),
+      map((data) => data[1]),
+      switchMap((data) => this.apiService.recipe.put(data._id!, data).pipe(map(() => recipeSaved())))
     )
   );
 }
