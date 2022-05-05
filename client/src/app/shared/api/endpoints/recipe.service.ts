@@ -20,6 +20,10 @@ export class RecipeService {
     return this.httpClient.post<any>(this.endpointUrl, recipe);
   }
 
+  public put(id: string, recipe: Partial<IRecipe>): Observable<any> {
+    return this.httpClient.put<any>(this.endpointUrl + `/${id}`, recipe);
+  }
+
   public delete(id: string): Observable<any> {
     return this.httpClient.delete<any>(this.endpointUrl + `/${id}`);
   }
