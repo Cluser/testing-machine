@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { IRecipe } from "src/app/shared/interfaces/IRecipe";
 
 export const addRecipe = createAction("[Settings page] Add recipe", props<{ recipe: Partial<IRecipe> }>());
-export const recipeAdded = createAction("[Recipe store] Recipe added");
+export const recipeAdded = createAction("[Recipe store] Recipe added", props<{ recipe: Partial<IRecipe> }>());
 
 export const removeRecipe = createAction("[Settings page] Remove recipe", props<{ id: string }>());
 export const recipeRemoved = createAction("[Recipe store] Recipe removed");
