@@ -1,8 +1,6 @@
 <div class="recipe">
   <div class="recipe__name">Nazwa referencji</div>
-  <select class="recipe__selected">
-    <option value="">Wybierz referencję</option>
-    <option value="InlineMASTER1">InlineMASTER 1500RPM</option>
-    <option value="InlineMASTER2">InlineMASTER 1000RPM</option>
+  <select class="recipe__selected" [ngModel]="recipeState.recipeEdit" (ngModelChange)="onRecipeChange($event)" [compareWith]="compareFn">
+    <option *ngFor="let recipe of recipeState.recipe" [ngValue]="recipe">{{ recipe.name }}</option>
   </select>
 </div>
