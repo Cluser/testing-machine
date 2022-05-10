@@ -42,17 +42,11 @@ export class SettingsSequenceComponent implements OnInit {
     this.initSubscriptions();
   }
 
-  public addRow(): void {
-    this.store.dispatch(addRecipeStep({ step: { velocity: 0, time: 0, oilFogTof: 0, oilFogTon: 0 } }));
+  public addStep(): void {
+    const emptyStep: IRecipeStep = { velocity: 0, time: 0, oilFogTof: 0, oilFogTon: 0 };
     this.grid?.api?.applyTransaction({
-      add: [
-        {
-          velocity: 0,
-          time: 0,
-          oilFogTof: 0,
-          oilFogTon: 0,
-        },
-      ],
+      add: [emptyStep],
     });
+    this.store.dispatch(addRecipeStep({ step: emptyStep }));
   }
 }
