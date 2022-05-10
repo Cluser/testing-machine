@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
-import { getRecipeEditSteps } from "src/app/core/store/recipe";
+import { addRecipeStep, getRecipeEditSteps } from "src/app/core/store/recipe";
 import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { GridOptions } from "ag-grid-community";
 
@@ -40,5 +40,19 @@ export class SettingsSequenceComponent implements OnInit {
     this.grid = grid;
     this.grid?.api?.setColumnDefs([{ field: "step", valueGetter: "node.rowIndex + 1" }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }]);
     this.initSubscriptions();
+  }
+
+  public addRow(): void {
+    this.store.dispatch(addRecipeStep({ step: { velocity: 0, time: 0, oilFogTof: 0, oilFogTon: 0 } }));
+    this.grid?.api?.applyTransaction({
+      add: [
+        {
+          velocity: 0,
+          time: 0,
+          oilFogTof: 0,
+          oilFogTon: 0,
+        },
+      ],
+    });
   }
 }

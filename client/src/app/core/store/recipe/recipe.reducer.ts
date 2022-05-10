@@ -1,7 +1,9 @@
 import { createReducer, on, props } from "@ngrx/store";
 import { IRecipe } from "src/app/shared/interfaces/IRecipe";
+import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import {
   addRecipe,
+  addRecipeStep,
   changeEditRecipe,
   changeRecipeName,
   changeRecipeTemperatureLimit,
@@ -27,6 +29,7 @@ export const recipeReducer = createReducer(
   on(editRecipeChanged, (state) => onEditRecipeChanged(state)),
   on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
   on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props)),
+  on(addRecipeStep, (state, props) => onAddRecipeStep(state, props)),
   on(saveRecipe, (state) => onSaveRecipe(state))
 );
 
@@ -77,6 +80,14 @@ const onChangeRecipeTemperatureLimit = (state: IRecipeState, props: { temperatur
   recipeEdit: {
     ...state.recipeEdit,
     temperatureLimit: props.temperatureLimit,
+  },
+});
+
+const onAddRecipeStep = (state: IRecipeState, props: { step: IRecipeStep }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    steps: state.recipeEdit.steps?.concat(props.step),
   },
 });
 
