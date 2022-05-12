@@ -7,6 +7,7 @@ import {
   changeEditRecipe,
   changeRecipeName,
   changeRecipeTemperatureLimit,
+  changeStepValue,
   editRecipeChanged,
   getRecipes,
   recipeAdded,
@@ -30,7 +31,8 @@ export const recipeReducer = createReducer(
   on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
   on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props)),
   on(addRecipeStep, (state, props) => onAddRecipeStep(state, props)),
-  on(saveRecipe, (state) => onSaveRecipe(state))
+  on(saveRecipe, (state) => onSaveRecipe(state)),
+  on(changeStepValue, (state, props) => onChangeStepValue(state, props))
 );
 
 const onAddRecipe = (state: IRecipeState, props: { recipe: Partial<IRecipe> }) => ({
@@ -94,4 +96,12 @@ const onAddRecipeStep = (state: IRecipeState, props: { step: IRecipeStep }) => (
 const onSaveRecipe = (state: IRecipeState) => ({
   ...state,
   recipe: state.recipe.map((recipe: any) => (recipe._id == state.recipeEdit._id ? state.recipeEdit : recipe)),
+});
+
+const onChangeStepValue = (state: IRecipeState, props: { id: string; property: string; value: any }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    steps: state.recipeEdit.steps?.map((step, idx) => (idx === Number(props.id) ? { ...step, [props.property]: props.value } : step)),
+  },
 });

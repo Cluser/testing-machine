@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
-import { addRecipeStep, getRecipeEditSteps } from "src/app/core/store/recipe";
+import { addRecipeStep, changeStepValue, getRecipeEditSteps } from "src/app/core/store/recipe";
 import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
-import { GridOptions } from "ag-grid-community";
+import { CellEditRequestEvent, GridOptions } from "ag-grid-community";
 
 @Component({
   selector: "app-settings-sequence",
@@ -38,7 +38,14 @@ export class SettingsSequenceComponent implements OnInit {
 
   public onGridReady(grid: GridOptions) {
     this.grid = grid;
-    this.grid?.api?.setColumnDefs([{ field: "step", valueGetter: "node.rowIndex + 1" }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }]);
+    this.grid?.api?.setColumnDefs([
+      { field: "step", valueGetter: "node.rowIndex + 1" },
+      { field: "velocity", editable: true },
+      { field: "time", editable: true },
+      { field: "oilFogTon", editable: true },
+      { field: "oilFogTof", editable: true },
+    ]);
+
     this.initSubscriptions();
   }
 
@@ -48,5 +55,9 @@ export class SettingsSequenceComponent implements OnInit {
       add: [emptyStep],
     });
     this.store.dispatch(addRecipeStep({ step: emptyStep }));
+  }
+
+  public onCellEditRequest(event: CellEditRequestEvent) {
+    this.store.dispatch(changeStepValue({ id: event.node.id!, property: event.colDef.field!, value: event.newValue }));
   }
 }
