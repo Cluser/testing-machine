@@ -1,3 +1,17 @@
-<button (click)="addStep()">Dodaj krok</button>
-<ag-grid-angular style="width: 100%; height: 100%" class="ag-theme-alpine" [editType]="'fullRow'" [readOnlyEdit]="true" (cellEditRequest)="onCellEditRequest($event)" (gridReady)="onGridReady($event)">
-</ag-grid-angular>
+<div class="sequence">
+  <div class="menu">
+    <button class="menu__button" (click)="addStep()">Dodaj krok</button>
+    <button class="menu__button" (click)="removeStep()">Usuń krok</button>
+  </div>
+  <div class="grid">
+    <ag-grid-angular
+      style="width: 100%; height: 100%"
+      class="ag-theme-alpine"
+      [rowSelection]="'single'"
+      [readOnlyEdit]="true"
+      (cellEditRequest)="onCellEditRequest($event)"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </div>
+</div>

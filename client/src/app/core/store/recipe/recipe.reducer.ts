@@ -14,6 +14,7 @@ import {
   recipeRemoved,
   recipesReceived,
   removeRecipe,
+  removeRecipeStep,
   saveRecipe,
 } from "./recipe.actions";
 import { IRecipeState, initialRecipeState } from "./recipe.state";
@@ -31,6 +32,7 @@ export const recipeReducer = createReducer(
   on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
   on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props)),
   on(addRecipeStep, (state, props) => onAddRecipeStep(state, props)),
+  on(removeRecipeStep, (state, props) => onRemoveRecipeStep(state, props)),
   on(saveRecipe, (state) => onSaveRecipe(state)),
   on(changeStepValue, (state, props) => onChangeStepValue(state, props))
 );
@@ -90,6 +92,14 @@ const onAddRecipeStep = (state: IRecipeState, props: { step: IRecipeStep }) => (
   recipeEdit: {
     ...state.recipeEdit,
     steps: state.recipeEdit.steps?.concat(props.step),
+  },
+});
+
+const onRemoveRecipeStep = (state: IRecipeState, props: { step: IRecipeStep[] }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    steps: props.step,
   },
 });
 

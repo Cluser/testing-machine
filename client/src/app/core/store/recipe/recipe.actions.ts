@@ -23,6 +23,9 @@ export const recipeTemperatureLimitChanged = createAction("[Settings page] Recip
 export const addRecipeStep = createAction("[Settings page] Add recipe step", props<{ step: IRecipeStep }>());
 export const recipeStepAdded = createAction("[Settings page] Recipe step added");
 
+export const removeRecipeStep = createAction("[Settings page] Remove recipe step", props<{ step: IRecipeStep[] }>());
+export const recipeStepRemoved = createAction("[Settings page] Recipe step removed");
+
 export const saveRecipe = createAction("[Settings page] Save recipe");
 export const recipeSaved = createAction("[Recipe store] Recipe saved");
 

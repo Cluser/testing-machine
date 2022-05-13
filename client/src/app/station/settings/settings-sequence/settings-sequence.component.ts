@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
-import { addRecipeStep, changeStepValue, getRecipeEditSteps } from "src/app/core/store/recipe";
+import { addRecipeStep, changeStepValue, getRecipeEditSteps, removeRecipeStep } from "src/app/core/store/recipe";
 import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { CellEditRequestEvent, GridOptions } from "ag-grid-community";
 
@@ -23,7 +23,7 @@ export class SettingsSequenceComponent implements OnInit {
     this.closeSubscriptions();
   }
 
-  private initSubscriptions() {
+  private initSubscriptions(): void {
     const steps$: Observable<any> = this.store.select(getRecipeEditSteps);
     this.subscriptions.add(
       steps$.subscribe((steps: IRecipeStep[]) => {
@@ -32,11 +32,11 @@ export class SettingsSequenceComponent implements OnInit {
     );
   }
 
-  private closeSubscriptions() {
+  private closeSubscriptions(): void {
     this.subscriptions.unsubscribe();
   }
 
-  public onGridReady(grid: GridOptions) {
+  public onGridReady(grid: GridOptions): void {
     this.grid = grid;
     this.grid?.api?.setColumnDefs([
       { field: "step", valueGetter: "node.rowIndex + 1" },
@@ -50,14 +50,22 @@ export class SettingsSequenceComponent implements OnInit {
   }
 
   public addStep(): void {
-    const emptyStep: IRecipeStep = { velocity: 0, time: 0, oilFogTof: 0, oilFogTon: 0 };
-    this.grid?.api?.applyTransaction({
-      add: [emptyStep],
-    });
-    this.store.dispatch(addRecipeStep({ step: emptyStep }));
+    this.store.dispatch(addRecipeStep({ step: { velocity: 0, time: 0, oilFogTof: 0, oilFogTon: 0 } }));
   }
 
-  public onCellEditRequest(event: CellEditRequestEvent) {
+  public removeStep(): void {
+    const selectedRows = this.grid?.api?.getSelectedRows();
+    this.grid?.api?.applyTransaction({ remove: selectedRows });
+    this.store.dispatch(removeRecipeStep({ step: this.getAllRows() }));
+  }
+
+  private getAllRows(): any {
+    let rowData: any = [];
+    this.grid?.api?.forEachNode((node) => rowData.push(node.data));
+    return rowData;
+  }
+
+  public onCellEditRequest(event: CellEditRequestEvent): void {
     this.store.dispatch(changeStepValue({ id: event.node.id!, property: event.colDef.field!, value: event.newValue }));
   }
 }
