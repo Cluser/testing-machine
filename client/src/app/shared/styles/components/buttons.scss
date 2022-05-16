@@ -1,0 +1,9 @@
+.button {
+  background-color: $secondary;
+  color: $neutralTheLightest;
+}
+
+.button:hover {
+  background-color: rgb(83, 83, 83);
+  cursor: pointer;
+}
