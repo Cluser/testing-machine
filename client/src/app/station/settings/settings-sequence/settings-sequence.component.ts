@@ -5,6 +5,8 @@ import { Observable, Subscription } from "rxjs";
 import { addRecipeStep, changeStepValue, getRecipeEditSteps, removeRecipeStep } from "src/app/core/store/recipe";
 import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { CellEditRequestEvent, GridOptions } from "ag-grid-community";
+import { SimpleModalService } from "ngx-simple-modal";
+import { ModalConfirmComponent } from "src/app/shared/modals/modal-confirm/modal-confirm.modal";
 
 @Component({
   selector: "app-settings-sequence",
@@ -15,7 +17,7 @@ export class SettingsSequenceComponent implements OnInit {
   private subscriptions = new Subscription();
   public grid?: GridOptions;
 
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService) {}
 
   ngOnInit(): void {}
 
@@ -54,9 +56,13 @@ export class SettingsSequenceComponent implements OnInit {
   }
 
   public removeStep(): void {
-    const selectedRows = this.grid?.api?.getSelectedRows();
-    this.grid?.api?.applyTransaction({ remove: selectedRows });
-    this.store.dispatch(removeRecipeStep({ step: this.getAllRows() }));
+    this.simpleModalService.addModal(ModalConfirmComponent, { title: "Usuwanie kroku", message: "Czy na pewno chcesz usunąć wybrany krok?" }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        const selectedRows = this.grid?.api?.getSelectedRows();
+        this.grid?.api?.applyTransaction({ remove: selectedRows });
+        this.store.dispatch(removeRecipeStep({ step: this.getAllRows() }));
+      }
+    });
   }
 
   private getAllRows(): any {
