@@ -12,7 +12,7 @@ import { selectRouteParams } from "src/app/core/store/router";
 })
 export class ModuleRecipeComponent implements OnInit {
   private subscriptions = new Subscription();
-  private idModule: number = 0;
+  public idModule: number = 0;
   public recipeState: IRecipeState = { recipeActive: [], recipeEdit: {}, recipe: [] };
 
   constructor(private store: Store<IAppState>) {}
