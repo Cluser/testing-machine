@@ -9,8 +9,6 @@
 .modal-header {
   background-color: $primary;
   color: $neutralTheLightest;
-  //   font-family: $headingFont !important;
-  //   font-weight: 0;
 }
 
 .modal-body {
@@ -19,5 +17,13 @@
 }
 
 .modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   border: none;
+}
+
+.confirmation {
+  width: 50%;
+  height: 100%;
 }
