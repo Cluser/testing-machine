@@ -15,7 +15,7 @@ import { IRecipe } from "src/app/shared/interfaces/IRecipe";
 })
 export class SettingsRecipeComponent implements OnInit {
   private subscriptions = new Subscription();
-  public recipeState: IRecipeState = { recipeEdit: {}, recipe: [] };
+  public recipeState: IRecipeState = { recipeActive: [], recipeEdit: {}, recipe: [] };
   public selected: Partial<IRecipe> = {};
 
   constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService) {}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { IAppState, IRecipeState } from "src/app/core/store/states";
-import { getRecipes, getRecipesData } from "src/app/core/store/recipe";
+import { getRecipes, getRecipesData, setRecipeActive } from "src/app/core/store/recipe";
 import { Observable, Subscription } from "rxjs";
+import { selectRouteParams } from "src/app/core/store/router";
 
 @Component({
   selector: "app-module-recipe",
@@ -11,7 +12,8 @@ import { Observable, Subscription } from "rxjs";
 })
 export class ModuleRecipeComponent implements OnInit {
   private subscriptions = new Subscription();
-  public recipeState: IRecipeState = { recipeEdit: {}, recipe: [] };
+  private idModule: number = 0;
+  public recipeState: IRecipeState = { recipeActive: [], recipeEdit: {}, recipe: [] };
 
   constructor(private store: Store<IAppState>) {}
 
@@ -26,9 +28,17 @@ export class ModuleRecipeComponent implements OnInit {
 
   private initSubscriptions() {
     const recipes$: Observable<IRecipeState> = this.store.select(getRecipesData);
+    const routeParams$: Observable<any> = this.store.select(selectRouteParams);
+
     this.subscriptions.add(
       recipes$.subscribe((recipeState: IRecipeState) => {
         this.recipeState = recipeState;
+      })
+    );
+
+    this.subscriptions.add(
+      routeParams$.subscribe((params: any) => {
+        this.idModule = Number(params.id);
       })
     );
   }
@@ -42,7 +52,7 @@ export class ModuleRecipeComponent implements OnInit {
   }
 
   public onRecipeChange(recipe: any): void {
-    // this.store.dispatch(changeEditRecipe({ recipeEdit: recipe }));
+    this.store.dispatch(setRecipeActive({ idModule: this.idModule, recipe }));
   }
 
   public compareFn(optionOne: any, optionTwo: any): boolean {

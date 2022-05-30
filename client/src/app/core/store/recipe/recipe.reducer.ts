@@ -16,6 +16,7 @@ import {
   removeRecipe,
   removeRecipeStep,
   saveRecipe,
+  setRecipeActive,
 } from "./recipe.actions";
 import { IRecipeState, initialRecipeState } from "./recipe.state";
 
@@ -34,7 +35,8 @@ export const recipeReducer = createReducer(
   on(addRecipeStep, (state, props) => onAddRecipeStep(state, props)),
   on(removeRecipeStep, (state, props) => onRemoveRecipeStep(state, props)),
   on(saveRecipe, (state) => onSaveRecipe(state)),
-  on(changeStepValue, (state, props) => onChangeStepValue(state, props))
+  on(changeStepValue, (state, props) => onChangeStepValue(state, props)),
+  on(setRecipeActive, (state, props) => onSetRecipeActive(state, props))
 );
 
 const onAddRecipe = (state: IRecipeState, props: { recipe: Partial<IRecipe> }) => ({
@@ -114,4 +116,9 @@ const onChangeStepValue = (state: IRecipeState, props: { id: string; property: s
     ...state.recipeEdit,
     steps: state.recipeEdit.steps?.map((step, idx) => (idx === Number(props.id) ? { ...step, [props.property]: props.value } : step)),
   },
+});
+
+const onSetRecipeActive = (state: IRecipeState, props: { idModule: number; recipe: IRecipe }) => ({
+  ...state,
+  recipeActive: state.recipeActive.map((recipe, id) => (id === props.idModule ? props.recipe : recipe)),
 });
