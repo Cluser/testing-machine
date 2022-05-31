@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 48.5% 48.5%;
   grid-template-rows: 6% 30% 10% 50%;
-  grid-template-areas: "info recipe" "sequence sequence" "measurements measurements" "chart chart";
+  grid-template-areas: "info recipe" "sequence image" "measurements image" "chart chart";
   column-gap: 1%;
   row-gap: 1%;
 }
@@ -23,6 +23,11 @@
 
 .module__sequence {
   grid-area: sequence;
+  background-color: rgb(250, 250, 250);
+}
+
+.module__image {
+  grid-area: image;
   background-color: rgb(250, 250, 250);
 }
 
