@@ -11,32 +11,37 @@
   row-gap: 1%;
 }
 
-.module__info {
-  grid-area: info;
+@mixin section {
   background-color: rgb(250, 250, 250);
+  border: 1px solid rgb(177, 177, 177);
+}
+
+.module__info {
+  @include section;
+  grid-area: info;
 }
 
 .module__recipe {
+  @include section;
   grid-area: recipe;
-  background-color: rgb(250, 250, 250);
 }
 
 .module__sequence {
+  @include section;
   grid-area: sequence;
-  background-color: rgb(250, 250, 250);
 }
 
 .module__image {
+  @include section;
   grid-area: image;
-  background-color: rgb(250, 250, 250);
 }
 
 .module__measurements {
+  @include section;
   grid-area: measurements;
-  background-color: rgb(250, 250, 250);
 }
 
 .module__chart {
+  @include section;
   grid-area: chart;
-  background-color: rgb(250, 250, 250);
 }

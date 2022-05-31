@@ -12,7 +12,7 @@ import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 })
 export class ModuleSequenceComponent implements OnInit {
   public selectedSequence: string = "grinding";
-  public columnDefs: ColDef[] = [{ field: "step", valueGetter: "node.rowIndex + 1" }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }];
+  public columnDefs: ColDef[] = [{ field: "step", valueGetter: "node.rowIndex + 1", width: 100 }, { field: "velocity" }, { field: "time" }, { field: "oilFogTon" }, { field: "oilFogTof" }];
 
   public rowData: IRecipeStep[] = [];
 
