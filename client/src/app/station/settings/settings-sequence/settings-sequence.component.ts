@@ -7,6 +7,7 @@ import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { CellEditRequestEvent, GridOptions } from "ag-grid-community";
 import { SimpleModalService } from "ngx-simple-modal";
 import { ModalConfirmComponent } from "src/app/shared/modals/modal-confirm/modal-confirm.modal";
+import { RecipeEnum } from "src/app/shared/enumarators/recipe-enum";
 
 @Component({
   selector: "app-settings-sequence",
@@ -41,11 +42,11 @@ export class SettingsSequenceComponent implements OnInit {
   public onGridReady(grid: GridOptions): void {
     this.grid = grid;
     this.grid?.api?.setColumnDefs([
-      { field: "step", valueGetter: "node.rowIndex + 1" },
-      { field: "velocity", editable: true },
-      { field: "time", editable: true },
-      { field: "oilFogTon", editable: true },
-      { field: "oilFogTof", editable: true },
+      { field: "step", headerName: RecipeEnum.step, valueGetter: "node.rowIndex + 1" },
+      { field: "velocity", headerName: RecipeEnum.velocity, editable: true },
+      { field: "time", headerName: RecipeEnum.time, editable: true },
+      { field: "oilFogTon", headerName: RecipeEnum.oilFogTon, editable: true },
+      { field: "oilFogTof", headerName: RecipeEnum.oilFogTof, editable: true },
     ]);
 
     this.initSubscriptions();
