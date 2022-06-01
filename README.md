@@ -19,4 +19,4 @@ This project just started. It's still under development.
 - Lazy loading routing with query parameters
 
 ## Images
-![](https://i.imgur.com/fHZTEkl.jpg](https://i.imgur.com/u7GeMwa.png))
+![](https://i.imgur.com/u7GeMwa.png)
