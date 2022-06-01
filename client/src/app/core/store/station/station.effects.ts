@@ -42,9 +42,12 @@ export class LoadDataEffects {
       map((data) =>
         addChartData({
           chartData: [
-            { name: data.station.timestamp.toString(), value: data.station.module[0].process[0].spindle_velocity },
-            { name: data.station.timestamp.toString(), value: data.station.module[1].process[0].spindle_velocity },
-            { name: data.station.timestamp.toString(), value: data.station.module[2].process[0].spindle_velocity },
+            { name: Date.now(), value: data.station.module[0].process[0].spindle_velocity! },
+            { name: Date.now(), value: data.station.module[1].process[0].spindle_velocity! },
+            { name: Date.now(), value: data.station.module[2].process[0].spindle_velocity! },
+            { name: Date.now(), value: data.station.module[0].process[0].motor_temperature! },
+            { name: Date.now(), value: data.station.module[1].process[0].motor_temperature! },
+            { name: Date.now(), value: data.station.module[2].process[0].motor_temperature! },
           ],
         })
       )

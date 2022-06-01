@@ -8,28 +8,22 @@ export const initialChartState: IChartState = {
   chart: [
     {
       results: [
-        {
-          name: "Spindle velocity",
-          series: [],
-        },
+        { name: "Spindle velocity", series: [] },
+        { name: "Motor temperature", series: [] },
       ],
     },
 
     {
       results: [
-        {
-          name: "Spindle velocity",
-          series: [],
-        },
+        { name: "Spindle velocity", series: [] },
+        { name: "Motor temperature", series: [] },
       ],
     },
 
     {
       results: [
-        {
-          name: "Spindle velocity",
-          series: [],
-        },
+        { name: "Spindle velocity", series: [] },
+        { name: "Motor temperature", series: [] },
       ],
     },
   ],

@@ -1,4 +1,4 @@
 export interface ISeries {
-  name: string;
+  name: number;
   value: number;
 }
