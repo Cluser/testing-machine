@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { getModule } from "src/app/core/store/station";
-import { IAppState, IChartState, IModuleState } from "src/app/core/store/states";
+import { DatePipe } from "@angular/common";
+import { IAppState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
 import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 import { getChartData } from "src/app/core/store/chart";
@@ -15,7 +15,7 @@ export class ModuleChartComponent implements OnInit {
   private subscriptions = new Subscription();
   public lineChart: ILineChart = { results: [{ name: "Spindle velocity", series: [] }] };
 
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>, private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.initSubscriptions();
@@ -41,4 +41,6 @@ export class ModuleChartComponent implements OnInit {
   private updateLineChart(chart: ILineChart) {
     this.lineChart = chart;
   }
+
+  public xAxisTickFormatting = (value: any) => this.datePipe.transform(value, "hh:mm:ss");
 }
