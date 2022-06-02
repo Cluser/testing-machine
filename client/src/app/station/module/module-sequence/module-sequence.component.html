@@ -8,6 +8,12 @@
     <div class="parameters__grinding" *ngIf="selectedSequence === 'grinding'">
       <ag-grid-angular style="width: 100%; height: 100%" class="ag-theme-alpine" [rowData]="rowData" [columnDefs]="columnDefs"> </ag-grid-angular>
     </div>
-    <div class="parameters__testing" *ngIf="selectedSequence === 'testing'"></div>
+    <div class="parameters__testing" *ngIf="selectedSequence === 'testing'">
+      <input class="testing__min-flow" />
+      <input class="testing__max-flow" />
+      <input class="testing__min-pressure" />
+      <input class="testing__max-pressure" />
+      <button class="testing__start-test">Rozpocznij test</button>
+    </div>
   </div>
 </div>
