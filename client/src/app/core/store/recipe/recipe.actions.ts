@@ -11,7 +11,7 @@ export const recipeRemoved = createAction("[Recipe store] Recipe removed");
 export const getRecipes = createAction("[Settings page] Get recipes");
 export const recipesReceived = createAction("[Recipe store] Recipes received", props<{ recipe: IRecipe[] }>());
 
-export const changeEditRecipe = createAction("[Settings page] Change edit recipe", props<{ recipeEdit: IRecipe }>());
+export const changeEditRecipe = createAction("[Settings page] Change edit recipe", props<{ recipeEdit: Partial<IRecipe> }>());
 export const editRecipeChanged = createAction("[Recipe store] Edit recipe changed");
 
 export const changeRecipeName = createAction("[Settings page] Change recipe name", props<{ name: string }>());

@@ -8,6 +8,6 @@ export interface IRecipeState {
 
 export const initialRecipeState: IRecipeState = {
   recipeActive: [{}, {}, {}],
-  recipeEdit: { name: "test" },
+  recipeEdit: {},
   recipe: [],
 };

@@ -61,10 +61,13 @@ const onGetRecipes = (state: IRecipeState) => ({
 
 const onRecipesReceived = (state: IRecipeState, props: { recipe: IRecipe[] }) => ({
   ...state,
+  recipeEdit: {
+    ...props.recipe[0],
+  },
   recipe: props.recipe,
 });
 
-const onChangeEditRecipe = (state: IRecipeState, props: { recipeEdit: IRecipe }) => ({
+const onChangeEditRecipe = (state: IRecipeState, props: { recipeEdit: Partial<IRecipe> }) => ({
   ...state,
   recipeEdit: props.recipeEdit,
 });
