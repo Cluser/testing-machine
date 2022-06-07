@@ -17,14 +17,11 @@ class Plc():
     def check_connection(self) -> bool:
         return self.client.get_connected()
 
-    def get_bool(self) -> bool:
-        data = self.client.db_read(99, 0, 260)
-        return snap7.util.get_bool(data, 0, 0)
-
     def get_data(self):
         start = time.time()
-        data = self.client.db_read(199, 0, 76)
+        data = self.client.db_read(199, 0, 166)
         # db.values.insert_one(values)
+        moduleDataSize = 52
 
         station.lifebit = snap7.util.get_bool(data, 0, 0)
         for x in range(8): station.alarm[x] = snap7.util.get_bool(data, 2, x) 
@@ -33,19 +30,19 @@ class Plc():
         station.timestamp = snap7.util.get_dword(data, 6)
 
         for idxModule in range(3):
-            station.module[idxModule].id = snap7.util.get_int(data, 10 + idxModule * 22)
-            station.module[idxModule].process[0].id = snap7.util.get_int(data, 12 + idxModule * 22)
-            for x in range(8): station.module[idxModule].process[0].alarm[x] = snap7.util.get_bool(data, 14 + idxModule * 22, x) 
-            for x in range(8): station.module[idxModule].process[0].alarm[8+x] = snap7.util.get_bool(data, 15 + idxModule * 22, x) 
-            for x in range(4): station.module[idxModule].process[0].alarm[16+x] = snap7.util.get_bool(data, 16 + idxModule * 22, x) 
+            station.module[idxModule].id = snap7.util.get_int(data, 10 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].id = snap7.util.get_int(data, 12 + idxModule * moduleDataSize)
+            for x in range(8): station.module[idxModule].process[0].alarm[x] = snap7.util.get_bool(data, 14 + idxModule * moduleDataSize, x) 
+            for x in range(8): station.module[idxModule].process[0].alarm[8+x] = snap7.util.get_bool(data, 15 + idxModule * moduleDataSize, x) 
+            for x in range(4): station.module[idxModule].process[0].alarm[16+x] = snap7.util.get_bool(data, 16 + idxModule * moduleDataSize, x) 
 
-            station.module[idxModule].process[0].status = snap7.util.get_int(data, 18 + idxModule * 22)
-            station.module[idxModule].process[0].spindle_no = snap7.util.get_int(data, 20 + idxModule * 22)
-            station.module[idxModule].process[0].time_left = snap7.util.get_int(data, 22 + idxModule * 22)
-            station.module[idxModule].process[0].spindle_velocity = snap7.util.get_int(data, 24 + idxModule * 22)
-            station.module[idxModule].process[0].motor_velocity = snap7.util.get_int(data, 26 + idxModule * 22)
-            station.module[idxModule].process[0].motor_temperature = snap7.util.get_int(data, 28 + idxModule * 22)
-            station.module[idxModule].process[0].outside_temperature = snap7.util.get_int(data, 30 + idxModule * 22)
+            station.module[idxModule].process[0].status = snap7.util.get_int(data, 18 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].spindle_no = snap7.util.get_string(data, 20 + idxModule * moduleDataSize, 30)
+            station.module[idxModule].process[0].time_left = snap7.util.get_int(data, 52 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].spindle_velocity = snap7.util.get_int(data, 54 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].motor_velocity = snap7.util.get_int(data, 56 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].motor_temperature = snap7.util.get_int(data, 58 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].outside_temperature = snap7.util.get_int(data, 60 + idxModule * moduleDataSize)
 
         end = time.time()
         print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')
