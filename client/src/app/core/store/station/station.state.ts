@@ -2,7 +2,7 @@ export interface IProcessState {
   id: number;
   alarm?: boolean[];
   status?: number;
-  spindle_no?: number;
+  spindle_no?: string;
   time_left?: number;
   spindle_velocity: number;
   motor_velocity?: number;

@@ -11,7 +11,7 @@ import { getModule } from "src/app/core/store/station";
 })
 export class ModuleInfoComponent implements OnInit {
   private subscriptions = new Subscription();
-  public module = {};
+  public module: any;
 
   constructor(private store: Store<IAppState>) {}
 
