@@ -2,7 +2,20 @@ import { Injectable } from "@angular/core";
 import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from "src/app/shared/api/api.service";
 import { map, mergeMap, concatMap, switchMap, tap } from "rxjs/operators";
-import { addRecipe, changeEditRecipe, editRecipeChanged, getRecipes, recipeAdded, recipeRemoved, recipeSaved, recipesReceived, removeRecipe, saveRecipe } from "./recipe.actions";
+import {
+  addRecipe,
+  changeEditRecipe,
+  editRecipeChanged,
+  getRecipes,
+  initRecipes,
+  recipeAdded,
+  recipeRemoved,
+  recipeSaved,
+  recipesInitiated,
+  recipesReceived,
+  removeRecipe,
+  saveRecipe,
+} from "./recipe.actions";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../states";
 
@@ -61,6 +74,13 @@ export class RecipeEffects {
       concatLatestFrom(() => this.store$.select((appState) => appState.recipeState.recipeEdit)),
       map((data) => data[1]),
       switchMap((data) => this.apiService.recipe.put(data._id!, data).pipe(map(() => recipeSaved())))
+    )
+  );
+
+  initRecipes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(initRecipes),
+      mergeMap(() => this.apiService.recipe.get().pipe(map((recipes) => recipesInitiated({ recipe: recipes }))))
     )
   );
 }

@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import { closeSocket, getStation, openSocket } from "src/app/core/store/station";
 import { IAppState, IStationState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
+import { initRecipes } from "../core/store/recipe";
 
 @Component({
   selector: "app-station",
@@ -17,6 +18,7 @@ export class StationComponent implements OnInit {
   ngOnInit() {
     this.initSubscriptions();
     this.openSocket();
+    this.initRecipes();
   }
 
   ngOnDestroy() {
@@ -39,5 +41,9 @@ export class StationComponent implements OnInit {
 
   private closeSocket() {
     this.store.dispatch(closeSocket());
+  }
+
+  private initRecipes() {
+    this.store.dispatch(initRecipes());
   }
 }

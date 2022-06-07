@@ -10,8 +10,10 @@ import {
   changeStepValue,
   editRecipeChanged,
   getRecipes,
+  initRecipes,
   recipeAdded,
   recipeRemoved,
+  recipesInitiated,
   recipesReceived,
   removeRecipe,
   removeRecipeStep,
@@ -36,7 +38,9 @@ export const recipeReducer = createReducer(
   on(removeRecipeStep, (state, props) => onRemoveRecipeStep(state, props)),
   on(saveRecipe, (state) => onSaveRecipe(state)),
   on(changeStepValue, (state, props) => onChangeStepValue(state, props)),
-  on(setRecipeActive, (state, props) => onSetRecipeActive(state, props))
+  on(setRecipeActive, (state, props) => onSetRecipeActive(state, props)),
+  on(initRecipes, (state) => onInitRecipes(state)),
+  on(recipesInitiated, (state, props) => onRecipesInitiated(state, props))
 );
 
 const onAddRecipe = (state: IRecipeState, props: { recipe: Partial<IRecipe> }) => ({
@@ -61,9 +65,6 @@ const onGetRecipes = (state: IRecipeState) => ({
 
 const onRecipesReceived = (state: IRecipeState, props: { recipe: IRecipe[] }) => ({
   ...state,
-  recipeEdit: {
-    ...props.recipe[0],
-  },
   recipe: props.recipe,
 });
 
@@ -124,4 +125,16 @@ const onChangeStepValue = (state: IRecipeState, props: { id: string; property: s
 const onSetRecipeActive = (state: IRecipeState, props: { idModule: number; recipe: IRecipe }) => ({
   ...state,
   recipeActive: state.recipeActive.map((recipe, id) => (id === props.idModule ? props.recipe : recipe)),
+});
+
+const onInitRecipes = (state: IRecipeState) => ({
+  ...state,
+});
+
+const onRecipesInitiated = (state: IRecipeState, props: { recipe: IRecipe[] }) => ({
+  ...state,
+  recipeEdit: {
+    ...props.recipe[0],
+  },
+  recipe: props.recipe,
 });

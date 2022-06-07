@@ -34,3 +34,6 @@ export const stepValueChanged = createAction("[Settings page] Step value changed
 
 export const setRecipeActive = createAction("[Module page] Set recipe active", props<{ idModule: number; recipe: IRecipe }>());
 export const recipeActiveSet = createAction("[Module page] Recipe active set");
+
+export const initRecipes = createAction("[Settings page] Init recipes");
+export const recipesInitiated = createAction("[Recipe store] Recipes initiated", props<{ recipe: IRecipe[] }>());
