@@ -26,8 +26,8 @@ export class ModuleSequenceComponent implements OnInit {
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {
-    this.store.select(getRecipeActive).subscribe((recipe) => (this.rowData = recipe.steps!));
+    this.store.select(getRecipeActive).subscribe((recipe) => {
+      if (recipe) this.rowData = recipe.steps!;
+    });
   }
-
-  ngOnDestroy() {}
 }
