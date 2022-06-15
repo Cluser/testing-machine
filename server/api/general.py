@@ -20,8 +20,8 @@ class Api():
             allow_headers=["*"],
         )
 
-        self.client.include_router(endpoints.measurement.router)
         self.client.include_router(endpoints.recipe.router)
+        self.client.include_router(endpoints.plc.router)
 
     def run(self):
         uvicorn.run(self.client, host="0.0.0.0", port=8000)

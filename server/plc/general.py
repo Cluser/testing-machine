@@ -45,7 +45,7 @@ class Plc():
             station.module[idxModule].process[0].outside_temperature = snap7.util.get_int(data, 60 + idxModule * moduleDataSize)
 
         end = time.time()
-        print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')
+        # print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')
 
         
         

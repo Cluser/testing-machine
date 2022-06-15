@@ -25,3 +25,5 @@ async def put(id: str, recipe: Recipe):
 async def delete(id: str):
     db.client.recipes.find_one_and_delete({"_id": ObjectId(id)})
     return {"status": "ok"}
+
+

@@ -15,6 +15,7 @@ import {
   recipesReceived,
   removeRecipe,
   saveRecipe,
+  setRecipeActive,
 } from "./recipe.actions";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../states";
@@ -82,5 +83,14 @@ export class RecipeEffects {
       ofType(initRecipes),
       mergeMap(() => this.apiService.recipe.get().pipe(map((recipes) => recipesInitiated({ recipe: recipes }))))
     )
+  );
+
+  setRecipeActive$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(setRecipeActive),
+        switchMap((data) => this.apiService.plc.setRecipe(data.recipe))
+      ),
+    { dispatch: false }
   );
 }
