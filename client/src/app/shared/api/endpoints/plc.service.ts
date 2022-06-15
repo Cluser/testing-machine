@@ -16,10 +16,10 @@ export class PlcService {
     return this.httpClient.get<number>(this.endpointUrl);
   }
 
-  public setRecipe(recipe: IRecipe): Observable<any> {
+  public setRecipe(moduleId: number, recipe: IRecipe): Observable<any> {
     const params = JSON.parse(
       JSON.stringify({
-        moduleId: 0,
+        moduleId: moduleId,
         recipeId: recipe._id,
       })
     );

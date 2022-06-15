@@ -89,7 +89,7 @@ export class RecipeEffects {
     () =>
       this.actions$.pipe(
         ofType(setRecipeActive),
-        switchMap((data) => this.apiService.plc.setRecipe(data.recipe))
+        switchMap((data) => this.apiService.plc.setRecipe(data.idModule, data.recipe))
       ),
     { dispatch: false }
   );
