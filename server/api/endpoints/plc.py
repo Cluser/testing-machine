@@ -56,3 +56,39 @@ async def set_recipe(params: SetRecipeParams):
     client.db_write(99, 0, data)
 
     return recipe
+
+@router.post("/confirmPlateChange", tags=["Plc"])
+async def confirm_plate_change():
+    data = client.db_read(198, 0, 1)
+    snap7.util.set_bool(data, 0, 0, True)
+
+    client.db_write(198, 0, data)
+
+    return "Plate change confirmed"
+
+@router.post("/startGrinding", tags=["Plc"])
+async def confirm_plate_change():
+    data = client.db_read(198, 0, 1)
+    snap7.util.set_bool(data, 0, 1, True)
+
+    client.db_write(198, 0, data)
+
+    return "Grinding started"
+
+@router.post("/startTesting", tags=["Plc"])
+async def confirm_plate_change():
+    data = client.db_read(198, 0, 1)
+    snap7.util.set_bool(data, 0, 2, True)
+
+    client.db_write(198, 0, data)
+
+    return "Testing started"
+
+@router.post("/reset", tags=["Plc"])
+async def confirm_plate_change():
+    data = client.db_read(198, 0, 1)
+    snap7.util.set_bool(data, 0, 3, True)
+
+    client.db_write(198, 0, data)
+
+    return "Reset done"
