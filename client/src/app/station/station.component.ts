@@ -4,6 +4,8 @@ import { closeSocket, getStation, openSocket } from "src/app/core/store/station"
 import { IAppState, IStationState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
 import { initRecipes } from "../core/store/recipe";
+import { SimpleModalService } from "ngx-simple-modal";
+import { ModalConfirmComponent } from "../shared/modals/modal-confirm/modal-confirm.modal";
 
 @Component({
   selector: "app-station",
@@ -12,8 +14,9 @@ import { initRecipes } from "../core/store/recipe";
 })
 export class StationComponent implements OnInit {
   private subscriptions = new Subscription();
+  private modalOpened: boolean = false;
 
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService) {}
 
   ngOnInit() {
     this.initSubscriptions();
@@ -28,7 +31,22 @@ export class StationComponent implements OnInit {
 
   private initSubscriptions() {
     const station$: Observable<IStationState> = this.store.select(getStation);
-    this.subscriptions.add(station$.subscribe((station: IStationState) => {}));
+    this.subscriptions.add(
+      station$.subscribe((station: IStationState) => {
+        if (station.module[0].process[0].status === 0) {
+          this.openChangePlateModal();
+        }
+      })
+    );
+  }
+
+  public openChangePlateModal(): void {
+    if (!this.modalOpened) {
+      this.modalOpened = true;
+      this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate?" }).subscribe((isConfirmed) => {
+        this.modalOpened = false;
+      });
+    }
   }
 
   private closeSubscriptions() {
