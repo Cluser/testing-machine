@@ -5,6 +5,8 @@ import { ColDef } from "ag-grid-community";
 import { getRecipeActive } from "src/app/core/store/recipe";
 import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { RecipeEnum } from "src/app/shared/enumarators/recipe-enum";
+import { ApiService } from "src/app/shared/api/api.service";
+import { selectRouteParams } from "src/app/core/store/router";
 
 @Component({
   selector: "app-module-sequence",
@@ -22,12 +24,21 @@ export class ModuleSequenceComponent implements OnInit {
   ];
 
   public rowData: IRecipeStep[] = [];
+  public moduleId: number = 0;
 
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>, private apiService: ApiService) {}
 
   ngOnInit() {
     this.store.select(getRecipeActive).subscribe((recipe) => {
       if (recipe) this.rowData = recipe.steps!;
     });
+
+    this.store.select(selectRouteParams).subscribe((params) => {
+      this.moduleId = params["id"];
+    });
+  }
+
+  startTesting() {
+    this.apiService.plc.startTesting(this.moduleId).subscribe();
   }
 }

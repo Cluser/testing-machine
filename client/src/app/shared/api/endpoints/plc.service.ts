@@ -23,23 +23,39 @@ export class PlcService {
     return this.httpClient.post<any>(this.endpointUrl + "/plc", params);
   }
 
-  public confirmPlateChange(): Observable<any> {
-    const params = JSON.parse(JSON.stringify({}));
+  public confirmPlateChange(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
     return this.httpClient.post(this.endpointUrl + "/confirmPlateChange", params);
   }
 
-  public startGrinding(): Observable<any> {
-    const params = JSON.parse(JSON.stringify({}));
+  public startGrinding(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
     return this.httpClient.post(this.endpointUrl + "/startGrinding", params);
   }
 
-  public startTesting(): Observable<any> {
-    const params = JSON.parse(JSON.stringify({}));
+  public startTesting(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
     return this.httpClient.post(this.endpointUrl + "/startTesting", params);
   }
 
-  public reset(): Observable<any> {
-    const params = JSON.parse(JSON.stringify({}));
+  public reset(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
     return this.httpClient.post(this.endpointUrl + "/reset", params);
   }
 }

@@ -46,7 +46,7 @@ export class StationComponent implements OnInit {
       this.modalOpened = true;
       this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate?" }).subscribe((isConfirmed) => {
         this.modalOpened = false;
-        this.apiService.plc.confirmPlateChange().subscribe();
+        this.apiService.plc.confirmPlateChange(1).subscribe();
       });
     }
   }
