@@ -8,13 +8,9 @@ import { IRecipe } from "../../interfaces/IRecipe";
 })
 export class PlcService {
   private apiUrl: string = "http://localhost:8000";
-  private endpointUrl: string = this.apiUrl + "/plc";
+  private endpointUrl: string = this.apiUrl;
 
   constructor(private httpClient: HttpClient) {}
-
-  public get(): Observable<any> {
-    return this.httpClient.get<number>(this.endpointUrl);
-  }
 
   public setRecipe(moduleId: number, recipe: IRecipe): Observable<any> {
     const params = JSON.parse(
@@ -24,6 +20,26 @@ export class PlcService {
       })
     );
 
-    return this.httpClient.post<any>(this.endpointUrl, params);
+    return this.httpClient.post<any>(this.endpointUrl + "/plc", params);
+  }
+
+  public confirmPlateChange(): Observable<any> {
+    const params = JSON.parse(JSON.stringify({}));
+    return this.httpClient.post(this.endpointUrl + "/confirmPlateChange", params);
+  }
+
+  public startGrinding(): Observable<any> {
+    const params = JSON.parse(JSON.stringify({}));
+    return this.httpClient.post(this.endpointUrl + "/startGrinding", params);
+  }
+
+  public startTesting(): Observable<any> {
+    const params = JSON.parse(JSON.stringify({}));
+    return this.httpClient.post(this.endpointUrl + "/startTesting", params);
+  }
+
+  public reset(): Observable<any> {
+    const params = JSON.parse(JSON.stringify({}));
+    return this.httpClient.post(this.endpointUrl + "/reset", params);
   }
 }

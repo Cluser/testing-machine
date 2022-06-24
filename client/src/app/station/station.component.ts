@@ -6,6 +6,7 @@ import { Observable, Subscription } from "rxjs";
 import { initRecipes } from "../core/store/recipe";
 import { SimpleModalService } from "ngx-simple-modal";
 import { ModalConfirmComponent } from "../shared/modals/modal-confirm/modal-confirm.modal";
+import { ApiService } from "../shared/api/api.service";
 
 @Component({
   selector: "app-station",
@@ -16,7 +17,7 @@ export class StationComponent implements OnInit {
   private subscriptions = new Subscription();
   private modalOpened: boolean = false;
 
-  constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService) {}
+  constructor(private store: Store<IAppState>, private simpleModalService: SimpleModalService, private apiService: ApiService) {}
 
   ngOnInit() {
     this.initSubscriptions();
@@ -45,6 +46,7 @@ export class StationComponent implements OnInit {
       this.modalOpened = true;
       this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate?" }).subscribe((isConfirmed) => {
         this.modalOpened = false;
+        this.apiService.plc.confirmPlateChange().subscribe();
       });
     }
   }
