@@ -12,7 +12,7 @@ import { ILineChart } from "src/app/shared/interfaces/ILineChart";
 })
 export class ModuleComponent implements OnInit {
   private subscriptions = new Subscription();
-  public lineChart: ILineChart = { results: [{ name: "Spindle velocity", series: [] }] };
+  public alarmExists: boolean = false;
 
   constructor(private store: Store<IAppState>) {}
 
@@ -26,6 +26,9 @@ export class ModuleComponent implements OnInit {
 
   private initSubscriptions() {
     const module$: Observable<IModuleState> = this.store.select(getModule);
+    module$.subscribe((module) => {
+      this.alarmExists = module.process[0].alarm?.find((alarm) => true)!;
+    });
   }
 
   private closeSubscriptions() {

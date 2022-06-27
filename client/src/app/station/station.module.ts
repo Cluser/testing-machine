@@ -20,6 +20,7 @@ import { SharedModule } from "../shared/shared.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalAddRecipeComponent } from "./settings/settings-recipe/modal-add-recipe/modal-add-recipe.modal";
 import { ModuleImageComponent } from './module/module-image/module-image.component';
+import { ModuleAlarmComponent } from './module/module-alarm/module-alarm.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ModuleImageComponent } from './module/module-image/module-image.compone
     SettingsRecipeComponent,
     ModalAddRecipeComponent,
     ModuleImageComponent,
+    ModuleAlarmComponent,
   ],
   imports: [CommonModule, SharedModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([]), FormsModule, ReactiveFormsModule],
 })

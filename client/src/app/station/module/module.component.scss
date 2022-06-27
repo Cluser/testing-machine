@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 48.5% 48.5%;
   grid-template-rows: 6% 30% 10% 48%;
-  grid-template-areas: "info recipe" "sequence image" "measurements image" "chart chart";
+  grid-template-areas: "info recipe" "sequence imageAlarm" "measurements imageAlarm" "chart chart";
   column-gap: 1%;
   row-gap: 1%;
 }
@@ -31,9 +31,9 @@
   grid-area: sequence;
 }
 
-.module__image {
+.module__imageAlarm {
   @include section;
-  grid-area: image;
+  grid-area: imageAlarm;
 }
 
 .module__measurements {

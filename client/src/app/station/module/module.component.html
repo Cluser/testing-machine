@@ -11,8 +11,9 @@
     <app-module-sequence></app-module-sequence>
   </div>
 
-  <div class="module__image">
-    <app-module-image></app-module-image>
+  <div class="module__imageAlarm" [ngSwitch]="alarmExists">
+    <app-module-image *ngSwitchCase="false"></app-module-image>
+    <app-module-alarm *ngSwitchCase="true"></app-module-alarm>
   </div>
 
   <div class="module__measurements">

@@ -10,3 +10,5 @@ export const getStationTime = createSelector(getStationState, (state: IStationSt
 
 export const getStation = createSelector(getStationState, (state: IStationState) => state);
 export const getModule = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id]);
+
+export const getAlarms = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].alarm);
