@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalAddRecipeComponent } from "./settings/settings-recipe/modal-add-recipe/modal-add-recipe.modal";
 import { ModuleImageComponent } from './module/module-image/module-image.component';
 import { ModuleAlarmComponent } from './module/module-alarm/module-alarm.component';
+import { ModuleButtonsComponent } from './module/module-buttons/module-buttons.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ModuleAlarmComponent } from './module/module-alarm/module-alarm.compone
     ModalAddRecipeComponent,
     ModuleImageComponent,
     ModuleAlarmComponent,
+    ModuleButtonsComponent,
   ],
   imports: [CommonModule, SharedModule, StationRoutingModule, NgxChartsModule, AgGridModule.withComponents([]), FormsModule, ReactiveFormsModule],
 })

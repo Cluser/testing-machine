@@ -41,6 +41,15 @@ export class PlcService {
     return this.httpClient.post(this.endpointUrl + "/startGrinding", params);
   }
 
+  public stopGrinding(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
+    return this.httpClient.post(this.endpointUrl + "/stopGrinding", params);
+  }
+
   public startTesting(moduleId: number): Observable<any> {
     const params = JSON.parse(
       JSON.stringify({
@@ -48,6 +57,15 @@ export class PlcService {
       })
     );
     return this.httpClient.post(this.endpointUrl + "/startTesting", params);
+  }
+
+  public stopTesting(moduleId: number): Observable<any> {
+    const params = JSON.parse(
+      JSON.stringify({
+        moduleId: moduleId,
+      })
+    );
+    return this.httpClient.post(this.endpointUrl + "/stopTesting", params);
   }
 
   public reset(moduleId: number): Observable<any> {

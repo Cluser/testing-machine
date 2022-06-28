@@ -7,6 +7,7 @@ import { IRecipeStep } from "src/app/shared/interfaces/IRecipeStep";
 import { RecipeEnum } from "src/app/shared/enumarators/recipe-enum";
 import { ApiService } from "src/app/shared/api/api.service";
 import { selectRouteParams } from "src/app/core/store/router";
+import { DataShareService } from "src/app/shared/services/sequence-type.service";
 
 @Component({
   selector: "app-module-sequence",
@@ -26,7 +27,7 @@ export class ModuleSequenceComponent implements OnInit {
   public rowData: IRecipeStep[] = [];
   public moduleId: number = 0;
 
-  constructor(private store: Store<IAppState>, private apiService: ApiService) {}
+  constructor(private store: Store<IAppState>, private apiService: ApiService, private dataShare: DataShareService) {}
 
   ngOnInit() {
     this.store.select(getRecipeActive).subscribe((recipe) => {
@@ -40,5 +41,15 @@ export class ModuleSequenceComponent implements OnInit {
 
   startTesting() {
     this.apiService.plc.startTesting(this.moduleId).subscribe();
+  }
+
+  selectGrinding() {
+    this.selectedSequence = "grinding";
+    this.dataShare.selectedSequence.next("grinding");
+  }
+
+  selectTesting() {
+    this.selectedSequence = "testing";
+    this.dataShare.selectedSequence.next("testing");
   }
 }

@@ -1,7 +1,7 @@
 <div class="sequence">
   <div class="type">
-    <button class="type__grinding" [class.type--selected]="selectedSequence == 'grinding'" (click)="selectedSequence = 'grinding'">Docieranie</button>
-    <button class="type__test" [class.type--selected]="selectedSequence == 'testing'" (click)="selectedSequence = 'testing'">Testowanie</button>
+    <button class="type__grinding" [class.type--selected]="selectedSequence == 'grinding'" (click)="selectGrinding()">Docieranie</button>
+    <button class="type__test" [class.type--selected]="selectedSequence == 'testing'" (click)="selectTesting()">Testowanie</button>
   </div>
 
   <div class="parameters">
