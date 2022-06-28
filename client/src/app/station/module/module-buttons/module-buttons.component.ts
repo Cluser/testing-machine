@@ -39,7 +39,7 @@ export class ModuleButtonsComponent implements OnInit {
     });
 
     this.store.select(getAllowTestStop).subscribe((allowTestStop) => {
-      this.allowTestStart = allowTestStop!;
+      this.allowTestStop = allowTestStop!;
     });
   }
 
