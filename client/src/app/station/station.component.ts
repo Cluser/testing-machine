@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { closeSocket, getStation, openSocket } from "src/app/core/store/station";
-import { IAppState, IStationState } from "src/app/core/store/states";
+import { IAppState, IModuleState, IStationState } from "src/app/core/store/states";
 import { Observable, Subscription } from "rxjs";
 import { initRecipes } from "../core/store/recipe";
 import { SimpleModalService } from "ngx-simple-modal";
@@ -34,19 +34,21 @@ export class StationComponent implements OnInit {
     const station$: Observable<IStationState> = this.store.select(getStation);
     this.subscriptions.add(
       station$.subscribe((station: IStationState) => {
-        if (station.module[0].process[0].status === 0) {
-          this.openChangePlateModal();
+        for (let module of station.module) {
+          if (module.process[0].status === 0) {
+            this.openChangePlateModal(module.id);
+          }
         }
       })
     );
   }
 
-  public openChangePlateModal(): void {
+  public openChangePlateModal(moduleId: number): void {
     if (!this.modalOpened) {
       this.modalOpened = true;
-      this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate?" }).subscribe((isConfirmed) => {
+      this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate na stacji " + (moduleId + 1) + "?" }).subscribe((isConfirmed) => {
         this.modalOpened = false;
-        this.apiService.plc.confirmPlateChange(1).subscribe();
+        this.apiService.plc.confirmPlateChange(moduleId).subscribe();
       });
     }
   }
