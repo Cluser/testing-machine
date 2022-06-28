@@ -33,3 +33,8 @@
   -moz-text-align-last: center;
   border: none;
 }
+
+.recipe__selected:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}

@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import { IAppState, IRecipeState } from "src/app/core/store/states";
 import { getRecipes, getRecipesData, setRecipeActive } from "src/app/core/store/recipe";
 import { selectRouteParams } from "src/app/core/store/router";
+import { getAllowRecipeChangeStatus } from "src/app/core/store/station";
 
 @Component({
   selector: "app-module-recipe",
@@ -12,6 +13,7 @@ import { selectRouteParams } from "src/app/core/store/router";
 export class ModuleRecipeComponent implements OnInit {
   public idModule: number = 0;
   public recipeState: IRecipeState = { recipeActive: [], recipeEdit: {}, recipe: [] };
+  public allowRecipeChangeStatus: boolean = false;
 
   constructor(private store: Store<IAppState>) {}
 
@@ -21,6 +23,9 @@ export class ModuleRecipeComponent implements OnInit {
     });
     this.store.select(selectRouteParams).subscribe((params: any) => {
       this.idModule = Number(params.id);
+    });
+    this.store.select(getAllowRecipeChangeStatus).subscribe((allowRecipeChangeStatus) => {
+      this.allowRecipeChangeStatus = allowRecipeChangeStatus!;
     });
     this.getRecipes();
   }

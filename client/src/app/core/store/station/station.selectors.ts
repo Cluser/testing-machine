@@ -12,3 +12,4 @@ export const getStation = createSelector(getStationState, (state: IStationState)
 export const getModule = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id]);
 
 export const getAlarms = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].alarm);
+export const getAllowRecipeChangeStatus = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_recipe_change);

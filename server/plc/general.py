@@ -19,9 +19,9 @@ class Plc():
 
     def get_data(self):
         start = time.time()
-        data = self.client.db_read(199, 0, 166)
+        data = self.client.db_read(199, 0, 172)
         # db.values.insert_one(values)
-        moduleDataSize = 52
+        moduleDataSize = 54
 
         station.lifebit = snap7.util.get_bool(data, 0, 0)
         for x in range(8): station.alarm[x] = snap7.util.get_bool(data, 2, x) 
@@ -43,6 +43,7 @@ class Plc():
             station.module[idxModule].process[0].motor_velocity = snap7.util.get_int(data, 56 + idxModule * moduleDataSize)
             station.module[idxModule].process[0].motor_temperature = snap7.util.get_int(data, 58 + idxModule * moduleDataSize)
             station.module[idxModule].process[0].outside_temperature = snap7.util.get_int(data, 60 + idxModule * moduleDataSize)
+            station.module[idxModule].process[0].allow_recipe_change = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 0)
 
         end = time.time()
         # print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')

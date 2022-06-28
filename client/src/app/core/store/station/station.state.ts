@@ -8,6 +8,7 @@ export interface IProcessState {
   motor_velocity?: number;
   motor_temperature?: number;
   outside_temperature?: number;
+  allow_recipe_change?: boolean;
 }
 
 export interface IModuleState {

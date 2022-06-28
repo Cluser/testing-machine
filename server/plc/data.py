@@ -11,6 +11,7 @@ class Process(BaseModel):
     motor_velocity: int
     motor_temperature: int
     outside_temperature: int
+    allow_recipe_change: bool
 
 class Module(BaseModel):
     id: int
@@ -40,7 +41,8 @@ station = Station(
                     spindle_velocity = 100,
                     motor_velocity = 100,
                     motor_temperature = 20,
-                    outside_temperature = 30
+                    outside_temperature = 30,
+                    allow_recipe_change = False
                 )
             ]
         ),
@@ -56,7 +58,8 @@ station = Station(
                     spindle_velocity = 100,
                     motor_velocity = 100,
                     motor_temperature = 20,
-                    outside_temperature = 30
+                    outside_temperature = 30,
+                    allow_recipe_change = False
                 )
             ]
         ),
@@ -72,7 +75,8 @@ station = Station(
                     spindle_velocity = 100,
                     motor_velocity = 100,
                     motor_temperature = 20,
-                    outside_temperature = 30
+                    outside_temperature = 30,
+                    allow_recipe_change = False
                 )
             ]
         )
