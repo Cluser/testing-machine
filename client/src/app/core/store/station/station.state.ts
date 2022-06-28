@@ -9,6 +9,10 @@ export interface IProcessState {
   motor_temperature?: number;
   outside_temperature?: number;
   allow_recipe_change?: boolean;
+  allow_grinding_start?: boolean;
+  allow_grinding_stop?: boolean;
+  allow_test_start?: boolean;
+  allow_test_stop?: boolean;
 }
 
 export interface IModuleState {

@@ -12,6 +12,10 @@ class Process(BaseModel):
     motor_temperature: int
     outside_temperature: int
     allow_recipe_change: bool
+    allow_grinding_start: bool
+    allow_grinding_stop: bool
+    allow_test_start: bool
+    allow_test_stop: bool
 
 class Module(BaseModel):
     id: int
@@ -42,7 +46,11 @@ station = Station(
                     motor_velocity = 100,
                     motor_temperature = 20,
                     outside_temperature = 30,
-                    allow_recipe_change = False
+                    allow_recipe_change = False,
+                    allow_grinding_start = False,
+                    allow_grinding_stop = False,
+                    allow_test_start = False,
+                    allow_test_stop = False
                 )
             ]
         ),
@@ -59,7 +67,11 @@ station = Station(
                     motor_velocity = 100,
                     motor_temperature = 20,
                     outside_temperature = 30,
-                    allow_recipe_change = False
+                    allow_recipe_change = False,
+                    allow_grinding_start = False,
+                    allow_grinding_stop = False,
+                    allow_test_start = False,
+                    allow_test_stop = False
                 )
             ]
         ),
@@ -76,7 +88,11 @@ station = Station(
                     motor_velocity = 100,
                     motor_temperature = 20,
                     outside_temperature = 30,
-                    allow_recipe_change = False
+                    allow_recipe_change = False,
+                    allow_grinding_start = False,
+                    allow_grinding_stop = False,
+                    allow_test_start = False,
+                    allow_test_stop = False
                 )
             ]
         )

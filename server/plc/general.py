@@ -44,6 +44,10 @@ class Plc():
             station.module[idxModule].process[0].motor_temperature = snap7.util.get_int(data, 58 + idxModule * moduleDataSize)
             station.module[idxModule].process[0].outside_temperature = snap7.util.get_int(data, 60 + idxModule * moduleDataSize)
             station.module[idxModule].process[0].allow_recipe_change = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 0)
+            station.module[idxModule].process[0].allow_grinding_start = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 1)
+            station.module[idxModule].process[0].allow_grinding_stop = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 2)
+            station.module[idxModule].process[0].allow_test_start = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 3)
+            station.module[idxModule].process[0].allow_test_stop = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 4)
 
         end = time.time()
         # print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')

@@ -1,4 +1,9 @@
-<div class="buttons">
-  <button class="btn--start" (click)="onStartClick()">Start</button>
-  <button class="btn--stop" (click)="onStopClick()">Stop</button>
+<div class="buttons" *ngIf="selectedSequence === 'grinding'">
+  <button class="btn--start" (click)="onStartClick()" [disabled]="!allowGrindingStart">Start docierania</button>
+  <button class="btn--stop" (click)="onStopClick()" [disabled]="!allowGrindingStop">Stop docierania</button>
+</div>
+
+<div class="buttons" *ngIf="selectedSequence === 'testing'">
+  <button class="btn--start" (click)="onStartClick()" [disabled]="!allowTestStart">Start testu</button>
+  <button class="btn--stop" (click)="onStopClick()" [disabled]="!allowTestStop">Stop testu</button>
 </div>

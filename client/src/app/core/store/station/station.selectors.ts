@@ -12,4 +12,9 @@ export const getStation = createSelector(getStationState, (state: IStationState)
 export const getModule = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id]);
 
 export const getAlarms = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].alarm);
+
 export const getAllowRecipeChangeStatus = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_recipe_change);
+export const getAllowGrindingStart = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_grinding_start);
+export const getAllowGrindingStop = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_grinding_stop);
+export const getAllowTestStart = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_test_start);
+export const getAllowTestStop = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_test_stop);
