@@ -6,12 +6,41 @@
 @mixin btn {
   width: 50%;
   height: 100%;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .btn--start {
   @include btn;
+  background-color: #4caf50;
+
+  &:hover {
+    background-color: #4db350;
+  }
+
+  &:disabled {
+    background-color: #e7e7e7;
+    color: black;
+    cursor: default;
+  }
 }
 
 .btn--stop {
   @include btn;
+  background-color: #f44336;
+
+  &:hover {
+    background-color: #ff4538;
+  }
+
+  &:disabled {
+    background-color: #e7e7e7;
+    color: black;
+    cursor: default;
+  }
 }
