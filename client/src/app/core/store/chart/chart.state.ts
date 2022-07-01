@@ -8,22 +8,22 @@ export const initialChartState: IChartState = {
   chart: [
     {
       results: [
-        { name: "Spindle velocity", series: [] },
-        { name: "Motor temperature", series: [] },
+        { name: "Obroty wrzeciona", series: [] },
+        { name: "Obroty silnika", series: [] },
       ],
     },
 
     {
       results: [
-        { name: "Spindle velocity", series: [] },
-        { name: "Motor temperature", series: [] },
+        { name: "Obroty wrzeciona", series: [] },
+        { name: "Obroty silnika", series: [] },
       ],
     },
 
     {
       results: [
-        { name: "Spindle velocity", series: [] },
-        { name: "Motor temperature", series: [] },
+        { name: "Obroty wrzeciona", series: [] },
+        { name: "Obroty silnika", series: [] },
       ],
     },
   ],

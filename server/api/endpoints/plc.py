@@ -13,7 +13,7 @@ import snap7
 
 router = APIRouter()
 client = snap7.client.Client()
-client.connect("192.168.0.1", 0, 0)
+client.connect("192.168.50.10", 0, 0)
 
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

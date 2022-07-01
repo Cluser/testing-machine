@@ -9,7 +9,7 @@ class Plc():
         self.client = snap7.client.Client()
 
     def connect(self) -> None:
-        self.client.connect("192.168.0.1", 0, 0)
+        self.client.connect("192.168.50.10", 0, 0)
 
     def disconnect(self) -> None:
         self.client.disconnect()
