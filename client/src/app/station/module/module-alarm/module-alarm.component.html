@@ -1,5 +1,5 @@
 <div class="alarms">
-  <div class="alarm" *ngFor="let alarm of alarmsModule">{{ alarm }}</div>
-  <div class="alarm" *ngFor="let alarm of alarmsProcess">{{ alarm }}</div>
+  <div appAlarmBlink class="alarm" *ngFor="let alarm of alarmsModule">{{ alarm }}</div>
+  <div appAlarmBlink class="alarm" *ngFor="let alarm of alarmsProcess">{{ alarm }}</div>
   <button class="btn-reset" (click)="resetAlarms()">Reset alarmów</button>
 </div>
