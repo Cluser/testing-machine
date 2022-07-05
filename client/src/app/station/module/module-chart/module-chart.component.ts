@@ -31,7 +31,7 @@ export class ModuleChartComponent implements OnInit {
   }
 
   private closeSubscriptions() {
-    this.subscriptions.unsubscribe();
+    // this.subscriptions.unsubscribe();
   }
 
   private onChartUpdate(chart: ILineChart) {

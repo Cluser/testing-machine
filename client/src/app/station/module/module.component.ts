@@ -27,7 +27,13 @@ export class ModuleComponent implements OnInit {
   private initSubscriptions() {
     const module$: Observable<IModuleState> = this.store.select(getModule);
     module$.subscribe((module) => {
-      this.alarmExists = module.process[0].alarm?.find((alarm) => true)!;
+      this.alarmExists = false;
+      module.alarm?.forEach((alarm) => {
+        if (alarm) this.alarmExists = true;
+      });
+      module.process[0].alarm?.forEach((alarm) => {
+        if (alarm) this.alarmExists = true;
+      });
     });
   }
 

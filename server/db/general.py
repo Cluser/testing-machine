@@ -4,7 +4,9 @@ class Db():
     def __init__(self) -> None:
         self.client = pymongo.MongoClient("mongodb://localhost:27017/")
         self.db = self.client["snap7"]
-        self.values = self.db["values"]
+        self.measurements_module_1 = self.db["measurements_module_1"]
+        self.measurements_module_2 = self.db["measurements_module_2"]
+        self.measurements_module_3 = self.db["measurements_module_3"]
         self.recipes = self.db["recipes"]
 
 def serializeDict(a) -> dict:

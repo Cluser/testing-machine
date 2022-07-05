@@ -18,19 +18,18 @@ class Plc():
         return self.client.get_connected()
 
     def get_data(self):
-        start = time.time()
-        data = self.client.db_read(199, 0, 172)
-        # db.values.insert_one(values)
+        data = self.client.db_read(199, 0, 178)
         moduleDataSize = 54
 
         station.lifebit = snap7.util.get_bool(data, 0, 0)
-        for x in range(8): station.alarm[x] = snap7.util.get_bool(data, 2, x) 
-        for x in range(8): station.alarm[8+x] = snap7.util.get_bool(data, 3, x) 
-        for x in range(4): station.alarm[16+x] = snap7.util.get_bool(data, 4, x) 
-        station.timestamp = snap7.util.get_dword(data, 6)
+        station.timestamp = snap7.util.get_dword(data, 2)
 
         for idxModule in range(3):
-            station.module[idxModule].id = snap7.util.get_int(data, 10 + idxModule * moduleDataSize)
+            station.module[idxModule].id = snap7.util.get_int(data, 6 + idxModule * moduleDataSize)
+            for x in range(8): station.module[idxModule].alarm[x] = snap7.util.get_bool(data, 8 + idxModule * moduleDataSize, x) 
+            for x in range(8): station.module[idxModule].alarm[8+x] = snap7.util.get_bool(data, 9 + idxModule * moduleDataSize, x) 
+            for x in range(4): station.module[idxModule].alarm[16+x] = snap7.util.get_bool(data, 10 + idxModule * moduleDataSize, x) 
+
             station.module[idxModule].process[0].id = snap7.util.get_int(data, 12 + idxModule * moduleDataSize)
             for x in range(8): station.module[idxModule].process[0].alarm[x] = snap7.util.get_bool(data, 14 + idxModule * moduleDataSize, x) 
             for x in range(8): station.module[idxModule].process[0].alarm[8+x] = snap7.util.get_bool(data, 15 + idxModule * moduleDataSize, x) 
@@ -48,9 +47,18 @@ class Plc():
             station.module[idxModule].process[0].allow_grinding_stop = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 2)
             station.module[idxModule].process[0].allow_test_start = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 3)
             station.module[idxModule].process[0].allow_test_stop = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 4)
+            station.module[idxModule].process[0].check_plate_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 5)
 
-        end = time.time()
-        # print('station.module[0].process[0].spindle_velocity: ', station.module[0].process[0].spindle_velocity, end - start, 's')
+        measurements_module_1 = {
+            'timestamp': station.timestamp,
+            'spindle_velocity': station.module[0].process[0].spindle_velocity,
+            'motor_velocity': station.module[0].process[0].motor_velocity,
+            'motor_temperature': station.module[0].process[0].motor_temperature,
+            'outside_temperature': station.module[0].process[0].outside_temperature,
+        }
+
+        db.client.measurements_module_1.insert_one(measurements_module_1)
+
 
         
         

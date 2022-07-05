@@ -7,6 +7,7 @@ import { initRecipes } from "../core/store/recipe";
 import { SimpleModalService } from "ngx-simple-modal";
 import { ModalConfirmComponent } from "../shared/modals/modal-confirm/modal-confirm.modal";
 import { ApiService } from "../shared/api/api.service";
+import { delay } from "rxjs/operators";
 
 @Component({
   selector: "app-station",
@@ -35,7 +36,7 @@ export class StationComponent implements OnInit {
     this.subscriptions.add(
       station$.subscribe((station: IStationState) => {
         for (let module of station.module) {
-          if (module.process[0].status === 0) {
+          if (module.process[0].check_plate_request) {
             this.openChangePlateModal(module.id);
           }
         }
@@ -47,8 +48,10 @@ export class StationComponent implements OnInit {
     if (!this.modalOpened) {
       this.modalOpened = true;
       this.simpleModalService.addModal(ModalConfirmComponent, { title: "Montowanie plate'a", message: "Czy zamontowałeś plate na stacji " + (moduleId + 1) + "?" }).subscribe((isConfirmed) => {
-        this.modalOpened = false;
-        this.apiService.plc.confirmPlateChange(moduleId).subscribe();
+        this.apiService.plc
+          .confirmPlateChange(moduleId)
+          .pipe(delay(1000))
+          .subscribe(() => (this.modalOpened = false));
       });
     }
   }

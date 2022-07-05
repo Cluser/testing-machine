@@ -11,7 +11,8 @@ export const getStationTime = createSelector(getStationState, (state: IStationSt
 export const getStation = createSelector(getStationState, (state: IStationState) => state);
 export const getModule = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id]);
 
-export const getAlarms = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].alarm);
+export const getAlarmsModule = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].alarm);
+export const getAlarmsProcess = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].alarm);
 
 export const getAllowRecipeChangeStatus = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_recipe_change);
 export const getAllowGrindingStart = createSelector(getStationState, selectRouteParams, (state: IStationState, { id }) => state.module[id].process[0].allow_grinding_start);

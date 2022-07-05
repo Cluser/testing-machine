@@ -13,6 +13,7 @@ export interface IProcessState {
   allow_grinding_stop?: boolean;
   allow_test_start?: boolean;
   allow_test_stop?: boolean;
+  check_plate_request?: boolean;
 }
 
 export interface IModuleState {

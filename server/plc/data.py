@@ -16,25 +16,26 @@ class Process(BaseModel):
     allow_grinding_stop: bool
     allow_test_start: bool
     allow_test_stop: bool
+    check_plate_request: bool
 
 class Module(BaseModel):
     id: int
+    alarm: List[bool]
     process: List[Process]
 
 class Station(BaseModel):
     lifebit: bool
-    alarm: List[bool]
     timestamp: int
     module: List[Module]
 
 
 station = Station(
     lifebit = True,
-    alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
     timestamp = 0,
     module = [
         Module(
             id = 1,
+            alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
             process = [
                 Process(
                     id = 1,
@@ -50,12 +51,14 @@ station = Station(
                     allow_grinding_start = False,
                     allow_grinding_stop = False,
                     allow_test_start = False,
-                    allow_test_stop = False
+                    allow_test_stop = False,
+                    check_plate_request = False
                 )
             ]
         ),
         Module(
             id = 2,
+            alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
             process = [
                 Process(
                     id = 1,
@@ -71,12 +74,14 @@ station = Station(
                     allow_grinding_start = False,
                     allow_grinding_stop = False,
                     allow_test_start = False,
-                    allow_test_stop = False
+                    allow_test_stop = False,
+                    check_plate_request = False
                 )
             ]
         ),
         Module(
             id = 3,
+            alarm = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False],
             process = [
                 Process(
                     id = 1,
@@ -92,7 +97,8 @@ station = Station(
                     allow_grinding_start = False,
                     allow_grinding_stop = False,
                     allow_test_start = False,
-                    allow_test_stop = False
+                    allow_test_stop = False,
+                    check_plate_request = False
                 )
             ]
         )

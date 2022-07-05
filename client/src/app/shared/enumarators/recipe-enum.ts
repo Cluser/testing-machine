@@ -1,7 +1,7 @@
 export enum RecipeEnum {
   step = "Krok",
-  velocity = "Obroty wrzeciona",
-  time = "Czas",
-  oilFogTon = "Mgła olejowa T1",
-  oilFogTof = "Mgła olejowa T2",
+  velocity = "Obroty [obr/min]",
+  time = "Czas [s]",
+  oilFogTon = "Mgła olejowa T1 [s]",
+  oilFogTof = "Mgła olejowa T2 [s]",
 }
