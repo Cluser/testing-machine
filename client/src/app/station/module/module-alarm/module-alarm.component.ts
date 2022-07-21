@@ -21,7 +21,7 @@ export class ModuleAlarmComponent implements OnInit {
     "100 06: Nieprawidłowe ciśnienie napięcia paska (B010A2)",
     "100 07: Nieprawidłowe ciśnienie pompy oleju (A105)",
     "100 08: Nieprawidłowy poziom oleju (A105)",
-    "100 09: Brak komuniaktu",
+    "100 09: Brak komunikacji z MES",
     "100 10: Brak komuniaktu",
     "100 11: Brak komuniaktu",
     "100 12: Brak komuniaktu",

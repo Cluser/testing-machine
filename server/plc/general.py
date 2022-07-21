@@ -20,9 +20,9 @@ class Plc():
         return self.client.get_connected()
 
     def lifebit(self):
-        data = self.client.db_read(199, 0, 1)
+        data = self.client.db_read(198, 0, 1)
         snap7.util.set_bool(data, 0, 0, not station.lifebit)
-        self.client.db_write(199, 0, data)
+        self.client.db_write(198, 0, data)
 
     def get_data(self):
         data = self.client.db_read(199, 0, 180)
