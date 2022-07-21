@@ -88,8 +88,8 @@ class Plc():
                 test2.test2.stop_blowing(idxModule, station.module[idxModule].process[0].blowing_result)
                 simple_report.create_simple_report(station.module[idxModule].process[0].spindle_no)
 
-            # if test2.test2.is_blowing_in_progress(idxModule):
-            #     test2.test2.add_blowing_result(idxModule)
+            if test2.test2.is_blowing_in_progress(idxModule):
+                test2.test2.add_blowing_result(idxModule)
 
         # Lifebit handling
         self.lifebit()
