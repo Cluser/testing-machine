@@ -29,4 +29,4 @@ class Main():
         apiThread.start()
 
         plcThread = threading.Thread(target = plc_thread)
-        plcThread.start()
+        # plcThread.start()

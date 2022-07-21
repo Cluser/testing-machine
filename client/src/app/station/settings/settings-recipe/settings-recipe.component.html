@@ -3,6 +3,6 @@
   <div class="recipe__add" (click)="openAddRecipeModal()">+</div>
   <div class="recipe__remove" (click)="openRemoveModal()">-</div>
   <select class="recipe__selected" [ngModel]="recipeState.recipeEdit" (ngModelChange)="onRecipeChange($event)" [compareWith]="compareFn">
-    <option *ngFor="let recipe of recipeState.recipe" [ngValue]="recipe">{{ recipe.name }}</option>
+    <option *ngFor="let recipe of recipeState.recipe" [ngValue]="recipe">{{ recipe.type }}</option>
   </select>
 </div>

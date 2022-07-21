@@ -5,7 +5,9 @@ import {
   addRecipe,
   addRecipeStep,
   changeEditRecipe,
-  changeRecipeName,
+  changeRecipeType,
+  changeRecipeIdNumber,
+  changeRecipeVersion,
   changeRecipeTemperatureLimit,
   changeStepValue,
   editRecipeChanged,
@@ -32,7 +34,9 @@ export const recipeReducer = createReducer(
   on(recipesReceived, (state, props) => onRecipesReceived(state, props)),
   on(changeEditRecipe, (state, props) => onChangeEditRecipe(state, props)),
   on(editRecipeChanged, (state) => onEditRecipeChanged(state)),
-  on(changeRecipeName, (state, props) => onChangeRecipeName(state, props)),
+  on(changeRecipeType, (state, props) => onChangeRecipeType(state, props)),
+  on(changeRecipeIdNumber, (state, props) => onChangeRecipeIdNumber(state, props)),
+  on(changeRecipeVersion, (state, props) => onChangeRecipeVersion(state, props)),
   on(changeRecipeTemperatureLimit, (state, props) => onChangeRecipeTemperatureLimit(state, props)),
   on(addRecipeStep, (state, props) => onAddRecipeStep(state, props)),
   on(removeRecipeStep, (state, props) => onRemoveRecipeStep(state, props)),
@@ -77,11 +81,27 @@ const onEditRecipeChanged = (state: IRecipeState) => ({
   ...state,
 });
 
-const onChangeRecipeName = (state: IRecipeState, props: { name: string }) => ({
+const onChangeRecipeType = (state: IRecipeState, props: { spindleType: string }) => ({
   ...state,
   recipeEdit: {
     ...state.recipeEdit,
-    name: props.name,
+    type: props.spindleType,
+  },
+});
+
+const onChangeRecipeIdNumber = (state: IRecipeState, props: { idNumber: string }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    idNumber: props.idNumber,
+  },
+});
+
+const onChangeRecipeVersion = (state: IRecipeState, props: { version: string }) => ({
+  ...state,
+  recipeEdit: {
+    ...state.recipeEdit,
+    version: props.version,
   },
 });
 

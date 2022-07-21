@@ -14,8 +14,14 @@ export const recipesReceived = createAction("[Recipe store] Recipes received", p
 export const changeEditRecipe = createAction("[Settings page] Change edit recipe", props<{ recipeEdit: Partial<IRecipe> }>());
 export const editRecipeChanged = createAction("[Recipe store] Edit recipe changed");
 
-export const changeRecipeName = createAction("[Settings page] Change recipe name", props<{ name: string }>());
-export const recipeNameChanged = createAction("[Settings page] Recipe name changed");
+export const changeRecipeType = createAction("[Settings page] Change recipe type", props<{ spindleType: string }>());
+export const recipeTypeChanged = createAction("[Settings page] Recipe type changed");
+
+export const changeRecipeIdNumber = createAction("[Settings page] Change recipe id number", props<{ idNumber: string }>());
+export const recipeIdNumberChanged = createAction("[Settings page] Recipe id number changed");
+
+export const changeRecipeVersion = createAction("[Settings page] Change recipe version", props<{ version: string }>());
+export const recipeVersionChanged = createAction("[Settings page] Recipe version changed");
 
 export const changeRecipeTemperatureLimit = createAction("[Settings page] Change recipe temperature limit", props<{ temperatureLimit: number }>());
 export const recipeTemperatureLimitChanged = createAction("[Settings page] Recipe temperature limit changed");

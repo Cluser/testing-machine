@@ -1,9 +1,15 @@
 <div class="parameters">
-  <div class="parameter__name">Nazwa wrzeciona</div>
-  <input class="parameter__value" (ngModelChange)="changeRecipeName($event)" [(ngModel)]="name" />
+  <div class="parameter__name">Typ wrzeciona</div>
+  <input class="parameter__value" (ngModelChange)="changeRecipeType($event)" [(ngModel)]="type" />
 
-  <div class="parameter__name2">Limit temperatury</div>
-  <input class="parameter__value2" (ngModelChange)="changeRecipeTemperatureLimit($event)" [(ngModel)]="temperatureLimit" />
+  <div class="parameter__name2">Numer ID</div>
+  <input class="parameter__value2" (ngModelChange)="changeRecipeIdNumber($event)" [(ngModel)]="idNumber" />
+
+  <div class="parameter__name3">Wersja</div>
+  <input class="parameter__value3" (ngModelChange)="changeRecipeVersion($event)" [(ngModel)]="version" />
+
+  <div class="parameter__name4">Limit temperatury</div>
+  <input class="parameter__value4" (ngModelChange)="changeRecipeTemperatureLimit($event)" [(ngModel)]="temperatureLimit" />
 
   <button class="parameter__save button" (click)="saveRecipe()">Save</button>
 </div>

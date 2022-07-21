@@ -8,6 +8,8 @@ class Step(BaseModel):
     oilFogTof: int
 
 class Recipe(BaseModel):
-    name: str
+    type: str
+    idNumber: str
+    version: str
     temperatureLimit: int
     steps: List[Step]

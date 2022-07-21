@@ -55,7 +55,7 @@ export class SettingsRecipeComponent implements OnInit {
 
   public openRemoveModal(): void {
     this.simpleModalService
-      .addModal(ModalConfirmComponent, { title: "Usuwanie referencji", message: "Czy na pewno usunąć referencję o nazwie " + this.recipeState.recipeEdit.name + "?" })
+      .addModal(ModalConfirmComponent, { title: "Usuwanie referencji", message: "Czy na pewno usunąć referencję o nazwie " + this.recipeState.recipeEdit.type + "?" })
       .subscribe((isConfirmed) => {
         if (isConfirmed) this.store.dispatch(removeRecipe({ id: this.recipeState.recipeEdit._id! }));
       });
@@ -63,7 +63,7 @@ export class SettingsRecipeComponent implements OnInit {
 
   public onRecipeChange(recipe: any): void {
     this.simpleModalService
-      .addModal(ModalConfirmComponent, { title: "Zapisywanie referencji", message: "Czy chcesz zapisać obecną referencję o nazwie " + this.recipeState.recipeEdit.name + "?" })
+      .addModal(ModalConfirmComponent, { title: "Zapisywanie referencji", message: "Czy chcesz zapisać obecną referencję o nazwie " + this.recipeState.recipeEdit.type + "?" })
       .subscribe((isConfirmed) => {
         if (isConfirmed) this.store.dispatch(saveRecipe());
         this.store.dispatch(changeEditRecipe({ recipeEdit: recipe }));

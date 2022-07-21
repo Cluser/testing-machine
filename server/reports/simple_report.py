@@ -9,7 +9,7 @@ def create_simple_report(select_data, type, folderName):
     with open('C:/Users/Dell/Desktop/aplikacje/testing-machine/server/config.json') as json_data_file:
         datajson = json.load(json_data_file)
     
-    workbook = xlsxwriter.Workbook('D://raporty/raport_podstawowy.xlsx')
+    workbook = xlsxwriter.Workbook(datajson['reports']['location'])
  
     worksheet = workbook.add_worksheet("Raport")
     worksheet.set_margins(left=0.5, right=0, top=0.15, bottom=0.15)
@@ -153,4 +153,3 @@ def create_simple_report(select_data, type, folderName):
 
 
 create_simple_report(None, None, None)
-# input()
