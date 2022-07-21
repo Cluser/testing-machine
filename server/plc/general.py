@@ -1,12 +1,16 @@
 import snap7
 import time
 from db import general as db
+from plc import test2
 
 from plc.data import station
+from reports import simple_report
 
 class Plc():
     def __init__(self) -> None:
         self.client = snap7.client.Client()
+
+        self.lock = False
 
     def connect(self) -> None:
         self.client.connect("192.168.50.10", 0, 0)
@@ -17,9 +21,14 @@ class Plc():
     def check_connection(self) -> bool:
         return self.client.get_connected()
 
+    def lifebit(self):
+        data = self.client.db_read(199, 0, 1)
+        snap7.util.set_bool(data, 0, 0, not station.lifebit)
+        self.client.db_write(199, 0, data)
+
     def get_data(self):
-        data = self.client.db_read(199, 0, 178)
-        moduleDataSize = 54
+        data = self.client.db_read(199, 0, 180)
+        moduleDataSize = 58
 
         station.lifebit = snap7.util.get_bool(data, 0, 0)
         station.timestamp = snap7.util.get_dword(data, 2)
@@ -48,19 +57,36 @@ class Plc():
             station.module[idxModule].process[0].allow_test_start = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 3)
             station.module[idxModule].process[0].allow_test_stop = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 4)
             station.module[idxModule].process[0].check_plate_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 5)
-
-        measurements_module_1 = {
-            'timestamp': station.timestamp,
-            'spindle_velocity': station.module[0].process[0].spindle_velocity,
-            'motor_velocity': station.module[0].process[0].motor_velocity,
-            'motor_temperature': station.module[0].process[0].motor_temperature,
-            'outside_temperature': station.module[0].process[0].outside_temperature,
-        }
-
-        db.client.measurements_module_1.insert_one(measurements_module_1)
+            station.module[idxModule].process[0].select_spindle_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 6)
+            station.module[idxModule].process[0].start_grinding_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 7)
+            station.module[idxModule].process[0].stop_grinding_request = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 0)
 
 
-        
+
+            if station.module[idxModule].process[0].select_spindle_request:
+                test2.test2.select_spindle(idxModule, station.module[idxModule].process[0].spindle_no)
+
+            if station.module[idxModule].process[0].start_grinding_request:
+                test2.test2.start_grinding(idxModule)
+
+            if station.module[idxModule].process[0].stop_grinding_request:
+                test2.test2.stop_grinding(idxModule)
+                simple_report.create_simple_report(None, None, station.module[idxModule].process[0].spindle_no)
+
+            if test2.test2.is_grinding_in_progress(idxModule):
+                test2.test2.add_grinding_result(idxModule,
+                                                station.module[idxModule].process[0].spindle_velocity,
+                                                station.module[idxModule].process[0].motor_velocity,
+                                                station.module[idxModule].process[0].motor_temperature,
+                                                station.module[idxModule].process[0].outside_temperature)
+
+        # Lifebit handling
+        self.lifebit()
+
+        # Pool data time
+        time.sleep(0.5)       
+
+
         
 
 

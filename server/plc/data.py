@@ -17,6 +17,9 @@ class Process(BaseModel):
     allow_test_start: bool
     allow_test_stop: bool
     check_plate_request: bool
+    select_spindle_request: bool
+    start_grinding_request: bool
+    stop_grinding_request: bool
 
 class Module(BaseModel):
     id: int
@@ -52,7 +55,10 @@ station = Station(
                     allow_grinding_stop = False,
                     allow_test_start = False,
                     allow_test_stop = False,
-                    check_plate_request = False
+                    check_plate_request = False,
+                    select_spindle_request = False,
+                    start_grinding_request = False, 
+                    stop_grinding_request = False
                 )
             ]
         ),
@@ -75,7 +81,10 @@ station = Station(
                     allow_grinding_stop = False,
                     allow_test_start = False,
                     allow_test_stop = False,
-                    check_plate_request = False
+                    check_plate_request = False,
+                    select_spindle_request = False,
+                    start_grinding_request = False, 
+                    stop_grinding_request = False
                 )
             ]
         ),
@@ -98,7 +107,10 @@ station = Station(
                     allow_grinding_stop = False,
                     allow_test_start = False,
                     allow_test_stop = False,
-                    check_plate_request = False
+                    check_plate_request = False,
+                    select_spindle_request = False,
+                    start_grinding_request = False, 
+                    stop_grinding_request = False
                 )
             ]
         )
