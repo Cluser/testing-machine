@@ -13,7 +13,7 @@ import snap7
 
 router = APIRouter()
 client = snap7.client.Client()
-# client.connect("192.168.50.10", 0, 0)
+client.connect("192.168.50.10", 0, 0)
 
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -36,7 +36,7 @@ async def set_recipe(params: SetRecipeParams):
 
     data = client.db_read(198, 0, 683)
     snap7.util.set_string(data, 0 + moduleOffset, recipe[0]["_id"], 30)
-    snap7.util.set_string(data, 32 + moduleOffset, recipe[0]["name"], 30)
+    snap7.util.set_string(data, 32 + moduleOffset, recipe[0]["type"], 30)
     snap7.util.set_int(data, 64 + moduleOffset, recipe[0]["temperatureLimit"])
 
     for idx, stepNo in enumerate(recipe[0]["steps"]):

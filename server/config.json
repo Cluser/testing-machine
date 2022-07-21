@@ -1,6 +1,6 @@
 {
   "reports": {
-    "location": "D://raporty/raport_podstawowy.xlsx",
+    "location": "D://raporty/",
     "logo": "C:/Users/Dell/Desktop/aplikacje/testing-machine/server/reports/imgs/misc/famot.jpg",
     "spindle": "C:/Users/Dell/Desktop/aplikacje/testing-machine/server/reports/imgs/spindles/3917362.jpg"
   }

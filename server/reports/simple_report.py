@@ -4,12 +4,12 @@ import datetime, logging
 import xlsxwriter
 import json
 
-def create_simple_report(select_data, type, folderName):
+def create_simple_report(folderName):
 
     with open('C:/Users/Dell/Desktop/aplikacje/testing-machine/server/config.json') as json_data_file:
         datajson = json.load(json_data_file)
     
-    workbook = xlsxwriter.Workbook(datajson['reports']['location'])
+    workbook = xlsxwriter.Workbook(datajson['reports']['location'] + folderName + ".xlsx")
  
     worksheet = workbook.add_worksheet("Raport")
     worksheet.set_margins(left=0.5, right=0, top=0.15, bottom=0.15)
@@ -152,4 +152,4 @@ def create_simple_report(select_data, type, folderName):
     pass
 
 
-create_simple_report(None, None, None)
+create_simple_report("test")

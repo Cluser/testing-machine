@@ -11,14 +11,23 @@ class test2:
         self.spindles = self.db["spindles"]
         self.grindings = self.db["grindings"]
         self.grindings_results = self.db["grindings_results"]
+        self.blowings = self.db["blowings"]
+        self.blowings_results = self.db["blowings_results"]
 
         # Variables
         self.selected_spindle_id = ["","",""]
+        self.OK = True
+        self.NOK = False
 
         # Stop last grinding after program init
-        self.stop_grinding(0)
-        self.stop_grinding(1)
-        self.stop_grinding(2)
+        self.stop_grinding(0, self.NOK)
+        self.stop_grinding(1, self.NOK)
+        self.stop_grinding(2, self.NOK)
+
+        # Stop last blowing after program init
+        self.stop_blowing(0, self.NOK)
+        self.stop_blowing(1, self.NOK)
+        self.stop_blowing(2, self.NOK)
         
 
     # Functions
@@ -46,7 +55,8 @@ class test2:
                     "spindle_id": self.selected_spindle_id[module],
                     "module": module,
                     "startTime": self.get_current_time(), 
-                    "stopTime": ""
+                    "stopTime": "",
+                    "resultOk": False
                 }
             ).inserted_id
 
@@ -63,13 +73,17 @@ class test2:
         ).inserted_id
 
 
-    def stop_grinding(self, module):
+    def stop_grinding(self, module, result):
         self.grindings.update_one(
             {
                 "_id": self.get_last_grinding_id(module)
             },
             {
-                "$set": { "stopTime": self.get_current_time() }
+                "$set": 
+                { 
+                    "stopTime": self.get_current_time(),
+                    "resultOk": result
+                }
             }
         )
 
@@ -97,6 +111,65 @@ class test2:
     def get_current_time(self):
         date_time_format = "%Y-%m-%d %H:%M:%S"
         return datetime.now().strftime(date_time_format)
+
+
+    # Blowing
+    def start_blowing(self, module: int):
+        if not self.is_blowing_in_progress(module):
+
+            self.blowings.insert_one(
+                {
+                    "spindle_id": self.selected_spindle_id[module],
+                    "module": module,
+                    "startTime": self.get_current_time(), 
+                    "stopTime": "",
+                    "resultOk": False
+                }
+            ).inserted_id
+
+    def add_blowing_result(self, module):
+        self.blowings.insert_one(
+            {
+                "blowing_id": self.get_last_blowing_id(module),
+                'timestamp': self.get_current_time(),
+            }
+        ).inserted_id
+
+
+    def stop_blowing(self, module, result):
+        self.blowings.update_one(
+            {
+                "_id": self.get_last_blowing_id(module)
+            },
+            {
+                "$set": 
+                { 
+                    "stopTime": self.get_current_time(),
+                    "resultOk": result
+                }
+            }
+        )
+
+    def get_last_blowing_id(self, module):
+        lastBlowing =  list(self.blowings.find({"module": module}).sort([('_id', -1)]).limit(1))
+
+        blowingExist = len(lastBlowing) > 0
+        
+        if blowingExist:
+            return lastBlowing[0]["_id"]
+        else:
+            return None 
+
+        
+    def is_blowing_in_progress(self, module):
+        lastBlowing =  list(self.blowings.find({"module": module}).sort([('_id', -1)]).limit(1))
+
+        blowingExist = len(lastBlowing) > 0
+
+        if blowingExist and lastBlowing[0]["stopTime"] == "":
+            return True
+        else:
+            return False 
 
 
 test2 = test2()

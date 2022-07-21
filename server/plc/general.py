@@ -10,8 +10,6 @@ class Plc():
     def __init__(self) -> None:
         self.client = snap7.client.Client()
 
-        self.lock = False
-
     def connect(self) -> None:
         self.client.connect("192.168.50.10", 0, 0)
 
@@ -60,7 +58,10 @@ class Plc():
             station.module[idxModule].process[0].select_spindle_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 6)
             station.module[idxModule].process[0].start_grinding_request = snap7.util.get_bool(data, 62 + idxModule * moduleDataSize, 7)
             station.module[idxModule].process[0].stop_grinding_request = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 0)
-
+            station.module[idxModule].process[0].start_blowing_request = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 1)
+            station.module[idxModule].process[0].stop_blowing_request = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 2)
+            station.module[idxModule].process[0].grinding_result = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 3)
+            station.module[idxModule].process[0].blowing_result = snap7.util.get_bool(data, 63 + idxModule * moduleDataSize, 4)
 
 
             if station.module[idxModule].process[0].select_spindle_request:
@@ -70,8 +71,8 @@ class Plc():
                 test2.test2.start_grinding(idxModule)
 
             if station.module[idxModule].process[0].stop_grinding_request:
-                test2.test2.stop_grinding(idxModule)
-                simple_report.create_simple_report(None, None, station.module[idxModule].process[0].spindle_no)
+                test2.test2.stop_grinding(idxModule, station.module[idxModule].process[0].grinding_result)
+                simple_report.create_simple_report(station.module[idxModule].process[0].spindle_no)
 
             if test2.test2.is_grinding_in_progress(idxModule):
                 test2.test2.add_grinding_result(idxModule,
@@ -79,6 +80,16 @@ class Plc():
                                                 station.module[idxModule].process[0].motor_velocity,
                                                 station.module[idxModule].process[0].motor_temperature,
                                                 station.module[idxModule].process[0].outside_temperature)
+
+            if station.module[idxModule].process[0].start_blowing_request:
+                test2.test2.start_blowing(idxModule)
+
+            if station.module[idxModule].process[0].stop_blowing_request:
+                test2.test2.stop_blowing(idxModule, station.module[idxModule].process[0].blowing_result)
+                simple_report.create_simple_report(station.module[idxModule].process[0].spindle_no)
+
+            # if test2.test2.is_blowing_in_progress(idxModule):
+            #     test2.test2.add_blowing_result(idxModule)
 
         # Lifebit handling
         self.lifebit()

@@ -20,6 +20,11 @@ class Process(BaseModel):
     select_spindle_request: bool
     start_grinding_request: bool
     stop_grinding_request: bool
+    start_blowing_request: bool
+    stop_blowing_request: bool
+    grinding_result: bool
+    blowing_result: bool
+
 
 class Module(BaseModel):
     id: int
@@ -58,7 +63,11 @@ station = Station(
                     check_plate_request = False,
                     select_spindle_request = False,
                     start_grinding_request = False, 
-                    stop_grinding_request = False
+                    stop_grinding_request = False,
+                    start_blowing_request = False,
+                    stop_blowing_request = False,
+                    grinding_result = False,
+                    blowing_result = False
                 )
             ]
         ),
@@ -84,7 +93,11 @@ station = Station(
                     check_plate_request = False,
                     select_spindle_request = False,
                     start_grinding_request = False, 
-                    stop_grinding_request = False
+                    stop_grinding_request = False,
+                    start_blowing_request = False,
+                    stop_blowing_request = False,
+                    grinding_result = False,
+                    blowing_result = False
                 )
             ]
         ),
@@ -110,7 +123,11 @@ station = Station(
                     check_plate_request = False,
                     select_spindle_request = False,
                     start_grinding_request = False, 
-                    stop_grinding_request = False
+                    stop_grinding_request = False, 
+                    start_blowing_request = False,
+                    stop_blowing_request = False,
+                    grinding_result = False,
+                    blowing_result = False
                 )
             ]
         )
